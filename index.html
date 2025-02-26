@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jahnavi's PortFolio</title>
+       
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="styles.css">
+
+        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+          
+    </head>
+    <body style="background-color: #bee9d8; display: flex; flex-direction: column; flex-grow: 1;">
+        <header>
+            <div class="header-bar">
+                <button class="menu-toggle" aria-label="Toggle navigation">
+                    &#9776; 
+                  </button>
+                <nav class="nav-dropdown">
+                  <ul class="nav-links" style="margin-bottom: 0; padding-left: 0;">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about-me">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                  </ul>
+                </nav>
+             </div>
+        </header>
+        <div style="display: flex; flex-direction: column; flex-grow: 1; height: 100%; margin-top: var(--e);">
+            <main>
+                <div id="home" class="container-fluid home-container" style="display: block;">
+                    <div class="home-child">
+                        <h2 class="hello-fadein" style="color: aliceblue;">Hello World!</h2>
+                        <h1 class="hello-fadein" style="font-size: 55px; color: #99d08d;">I'm Vaishnavi</h1>
+                        <!--<h2 style="color: aliceblue">Software Developer</h2>-->
+                        
+                        <p class="hello-typewriter" style="font-size: 20px;color: aliceblue;">Master of Computer Science, University of Massachusetts Amherst</p>
+                        <div>
+                            <button id="resume-button">Resume</button>
+                        </div>
+                    </div>
+                    <div class="wave">
+                        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                          <path fill="#ffffff" fill-opacity="1" 
+                            d="M0,224L30,213.3C60,203,120,181,180,149.3C240,117,300,75,360,69.3C420,64,480,96,540,138.7C600,181,660,235,720,224C780,213,840,139,900,128C960,117,1020,171,1080,197.3C1140,224,1200,224,1260,202.7C1320,181,1380,139,1410,117.3L1440,96L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z">
+                          </path>
+                        </svg>
+                      </div>
+                    
+                </div>
+                
+                
+                <div id="about-me" class="container about-me" style="display: none;">
+    
+                        
+                    <!-- <div style="text-align: center;">
+                        <h2>About Me</h2>
+                    </div> -->
+                    <!--<div class="about-child">!-->
+                        
+                            <p>
+                                <h5 style="color:rgb(75, 150, 47)">I am a highly skilled engineering professional with a strong background in C++ and Python, seeking full-time opportunities starting January 2025.
+                                     I equipped myself with a Master’s degree in Computer Science from the University of Massachusetts Amherst. My interests lie in scalable distributed systems, deep learning, and ML infrastructure.
+                                    To further enhance my expertise, I have undertaken relevant projects and coursework in these areas. Previously, I worked as a Software Engineer, developing and testing LTE PHY layer protocols before 
+                                    transitioning to the verification of 5G transceivers.
+
+                                </h5>
+                            </p>
+    
+                    <!--</div>-->
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <h2 style="color:#044531;margin-top:6rem">Education</h2>
+                      </div>
+                    <div class="education-box">
+                        <div class="education-header">
+                          <div class="education-logo">
+                            <img src="images/UMass_Seal_Medium_PMS_202.png" alt="UMASS logo">
+                          </div>
+                          <div class="education-info">
+                            <h3>University of Massachusetts Amherst</h3>
+                            <span class="exp-date">Feb 2023 - Dec 2024</span>
+                          </div>
+                         
+                          
+                        </div>
+                        <div class="education-sub-info">
+                            Master of Computer Science (Minor: Data Science) - GPA:4.0
+                        </div>
+                       
+                       
+                      </div>
+                      <div class="education-box">
+                        <div class="education-header">
+                          <div class="education-logo">
+                            <img src="images/nitk.png" alt="NITK logo">
+                          </div>
+                          <div class="education-info">
+                            <h3>National Institute of Technology Karnataka</h3>
+                            <span class="exp-date">Aug 2014 - May 2018</span>
+                          </div>
+                        </div>
+                       
+                            <div class="education-sub-info">
+                                Bachelor of Technology in Electrical and Electronics Engineering - CGPA:9.26/10
+                            </div>
+                      </div>
+                     
+                     
+                      
+                        <h2 style="color:#044531;margin-top:5rem;text-align:center;margin-bottom:2rem">Relevant Coursework</h2>
+                        <div class="coursework-box">
+                          <ul>
+                            <li>Advanced Natural Language Processing</li>
+                            <li>Distributed and Operating Systems</li>
+                            <li>Advanced Algorithms</li>
+                            <li>Neural Networks</li>
+                            <li>Machine Learning</li>
+                          </ul>
+                        </div>
+                      
+                    
+
+                      <div class="tech-skills-box">
+                        <h2 style="margin-top:5rem;text-align:center;color:#044531">Technical Skills</h2>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <!-- Programming Languages & Frameworks -->
+                            <div style="margin: 10px 0px;">
+                              <div style="margin-bottom: 10px;"> 
+                                <h4 style="margin-top:3rem;color:#165707">Programming Languages</h4>
+                              </div>
+                              <div class="card-body">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" width="80px" height="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original-wordmark.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original-wordmark.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <!--<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/perl/perl-original.svg" alt="Perl" width="80px" height="80px" style="padding-right: 10px;" /-->
+                              </div>
+                            </div>
+                      
+                            <!-- Databases & Frameworks -->
+                            <div style="margin: 10px 0px;">
+                              <div style="margin-bottom: 10px;">
+                                <h4 style="margin-top:3rem;color:#165707">Databases and Technologies</h4>
+                              </div>
+                              <div class="card-body">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original-wordmark.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original-wordmark.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" height="60px" width="60px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original-wordmark.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain-wordmark.svg" 
+     alt="Django Wordmark" 
+     width="80px" height="80px" style="padding-right: 10px" />
+     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" 
+     alt="Linux" 
+     width="80px" height="80px" style="padding-right: 10px" />
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original-wordmark.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-plain-wordmark.svg" height="80px" width="80px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" height="60px" width="60px" style="padding-right: 10px;"/>
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" height="60px" width="60px" style="padding-right: 10px;"/>
+                              </div>
+                            </div>
+                            <div style="margin: 10px 0px;">
+                                <div style="margin-bottom: 10px;">
+                                  <h4 style="margin-top:3rem;color:#165707">Machine Learning Frameworks</h4>
+                                </div>
+                                <div class="card-body">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original-wordmark.svg" 
+     alt="PyTorch" 
+     width="100px" height="100px" style="padding-right: 10px" />
+
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original-wordmark.svg" height="100px" width="100px" style="padding-right: 10px;"/>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                
+                    <!-- <div style="text-align: center; margin-bottom: 1.5rem;">                                                  -->  
+                    <!--   <h2 style="color:#044531">Technical Skills</h2>                                                         -->  
+                    <!-- </div>                                                                                                    -->  
+                    <!-- <div class="education-box">                                                                               -->  
+                    <!--   <div class="education-header">                                                                          -->  
+                    <!--       <ul>                                                                                                -->  
+                    <!--           <li>                                                                                            -->  
+                    <!--               <div class="technical-info">                                                                -->  
+                    <!--                   <h4>Languages</h4>                                                                      -->  
+                    <!--                 </div>                                                                                    -->  
+                    <!--               <div class="technical-sub-info">                                                            -->  
+                    <!--                  <span> C, C++, Python, System Verilog, HTML, CSS, Perl, Matlab, R</span>                 -->  
+                    <!--               </div>                                                                                      -->  
+                    <!--             </li>                                                                                         -->  
+                         
+                    <!--           <li>                                                                                            -->  
+                    <!--               <div class="technical-info">                                                                -->  
+                    <!--                   <h4>Technologies/Frameworks</h4>                                                        -->  
+                    <!--               </div>                                                                                      -->  
+                    <!--                   <div class="technical-sub-info">                                                        -->  
+                    <!--                       <span> Linux, Flask, Django, gRPC, SQLite, Shell scripting</span>                   -->  
+                    <!--                    </div>                                                                                 -->  
+                    <!--          </li>                                                                                            -->  
+                    <!--          <li>                                                                                             -->  
+                    <!--           <div class="technical-info">                                                                    -->  
+                    <!--               <h4>Machine Learning</h4>                                                                   -->  
+                    <!--           </div>                                                                                          -->  
+                    <!--               <div class="technical-sub-info">                                                            -->  
+                    <!--                   <span>  Numpy, Pandas, Tensorflow, Pytorch, Matplotlib, Scikit-learn</span>             -->  
+                    <!--                </div>                                                                                     -->  
+                    <!--           </li>                                                                                           -->  
+                    <!--           <li>                                                                                            -->  
+                    <!--               <div class="technical-info">                                                                -->  
+                    <!--                   <h4>Miscellaneous</h4>                                                                  -->  
+                    <!--               </div>                                                                                      -->  
+                    <!--                   <div class="technical-sub-info">                                                        -->  
+                    <!--                       <span>Git, Docker, Kubernetes, AWS, LLM fine-tuning, Distributed Applications</span>-->  
+                    <!--                    </div>                                                                                 -->  
+                    <!--           </li>                                                                                           -->  
+                    <!--        </ul>                                                                                              -->  
+                    <!-- </div>                                                                                                    -->  
+                
+                </div>
+
+                   
+                
+                <div id="experience" class="container experience" style="display: none;">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                      <h2 style="color:#044531">Work Experience</h2>
+                    </div>
+                  
+                    <!-- Experience Box 1 -->
+                    <div class="experience-box">
+                      <div class="exp-header">
+                        <div class="exp-logo">
+                          <img src="images/TexasInstruments-Logo.png" alt="Texas Instruments Logo">
+                        </div>
+                        <div class="exp-info">
+                          <h3>Design Verification Engineer</h3>
+                          <span class="exp-date">Aug 2019 - May 2022</span>
+                        </div>
+                      </div>
+                      <div class="exp-details">
+                        <!--<h5>Accenture, Bengaluru, India</h5>-->
+                        <ul>
+                          <li>Formulated tests to evaluate calibration subchip’s features and developed functional tests in C to assess various subchips
+                            within the SOC using Cortex R5/R4 processors.</li>
+                          <li>Developed automation scripts and build flows using Python to streamline regression tests, reducing manual verification time by <strong style="color:#99d08d">40%</strong>.</li>
+                        <li>Simulated behaviour of MATLAB models using Python to verify transmitter subchip calibration, cutting datapath
+                            test errors by <strong style="color:#99d08d">60%</strong>.</li>
+                          
+                        </ul>
+                      </div>
+                    </div>
+                  
+                    <!-- Experience Box 2 -->
+                    <div class="experience-box">
+                      <div class="exp-header">
+                        <div class="exp-logo">
+                          <img src="images/Qualcomm-Emblem.png" alt="Qualcomm Logo">
+                        </div>
+                        <div class="exp-info">
+                          <h3>Software Engineer</h3>
+                          <span class="exp-date">Sep 2018-Apr2019</span>
+                        </div>
+                      </div>
+                      <div class="exp-details">
+                        <!--<h5>Pivotchain Technologies, Remote</h5>-->
+                        <ul>
+                          <li>Enhanced LTE PHY layer protocols in CATM1 and NBIoT devices by developing Python and C++ feature tests.</li>
+                        <li>Identified corner cases to boost performance by up to <strong style="color:#99d08d">90%</strong> in key tests like throughput and SINR for both FDD and
+                            TDD systems.</li>
+                        <li>Assisted developers by adding implementations for 5G NR downlink channels in C++ reducing feature implementation time by <strong style="color:#99d08d">20 days</strong>.</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- Experience Box 3 -->
+                    <div class="experience-box">
+                        <div class="exp-header">
+                          <div class="exp-logo">
+                            <img src="images/logoFluxgenEnggTechnolog.jpg" alt="Fluxgen Logo">
+                          </div>
+                          <div class="exp-info">
+                            <h3>Software Engineering Intern</h3>
+                            <span class="exp-date">May 2017-July 2017</span>
+                          </div>
+                        </div>
+                        <div class="exp-details">
+                          <!--<h5>Pivotchain Technologies, Remote</h5>-->
+                          <ul>
+                            <li>Established a continuous monitoring system using Python for critical parameters of solar panels’ health,utilizing RPI, Arduino, and
+                                Zigbee as the central components.
+                            <li>Integrated firebase cloud uploads for real-time updates displaying information on
+                                RPi’s LCD screen during boot-up increasing the overall health by <strong style="color:#99d08d">60%</strong>.</li>
+                          </ul>
+                        </div>
+                      </div>
+                  </div>
+                  
+                  
+                  <div id="projects" class="container projects" style="display: none;">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                      <h2 style="color:#044531">Projects</h2>
+                    </div>
+                  
+                    <!-- Project box 1 -->
+                    <div class="project-box">
+                      <div class="project-header">
+                        
+                        <div class="project-info">
+                            <div class="left-group">
+                                <a href="https://github.com/vaishdho1/QuoteMI" target="_blank" class="combined-link">
+                                  <h3>Quote-MI </h3>
+                                  <i class="devicon-github-original-wordmark"></i>
+                                </a>
+                              </div>
+                          <span class="project-stack">Pytorch,LLM</span>
+                        </div>
+                      </div>
+                      <div class="project-details">
+                      <!--<h5>Accenture, Bengaluru, India</h5>-->
+                      <ul>
+                        <li>Manually curated dataset of 400 quotes for quote interpretation by sampling the top 10 most frequent labels from a pool of 30k quotes selected from the Quotes-500k dataset.</li>
+                        <li>Fine tuned and evaluated BERT, RoBERTA, GPT2, T5 for multi-label classification on quotes obtaining an accuracy of <strong style="color:#99d08d">70%</strong>.</li>
+                        <li>Performed zero-shot, one-shot, and few-shot prompting for quote interpretation on  T5 (3B) and Gemma (2B) models. </li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                  
+                   <!-- Project box 2 -->
+                   <div class="project-box">
+                    <div class="project-header">
+                      <div class="project-info">
+                        <div class="left-group">
+                          <a href="https://github.com/vaishdho1/Certifications/blob/main/stock-app-design-doc.pdf" target="_blank" class="combined-link">
+                            <h3>Stock Bazaar Application </h3>
+                            <i class="devicon-github-original-wordmark"></i>
+                          </a>
+                        </div>
+                        <span class="project-stack">Flask, Docker, Python</span>
+                      </div>
+                    </div>
+                    <div class="project-details">
+                    <!--<h5>Accenture, Bengaluru, India</h5>-->
+                    <ul>
+                      <li>Developed a microservices-based scalable stock trading application with dedicated Catalog, Frontend, and Order services.</li>
+                      <li>Implemented a thread-per-request concurrency model with locking, enabling the system to efficiently handle <strong style="color:#99d08d">10</strong> simultaneous clients.</li>
+                      <li>Designed a cache consistency mechanism on the frontend service using a server push model, improving average latency per lookup request by <strong style="color:#99d08d">5ms</strong>.</li>
+                      <li>Implemented replicated, fault tolerant order servers by performing leader elections and synchronizing recovered replicas.</li>
+                      <li>Created docker instance for the servers and deployed the application on AWS EC2 instance.</li>
+                    </ul>
+                  </div>
+                </div>
+                 
+                 <!-- Project box 3 -->
+                 <div class="project-box">
+                 <div class="project-header">
+                   <div class="project-info">
+                    <div class="left-group">
+                        <a href="https://github.com/vaishdho1/miniLlama2" target="_blank" class="combined-link">
+                          <h3>MiniLlama2</h3>
+                          <i class="devicon-github-original-wordmark"></i>
+                        </a>
+                      </div>                      
+                     <span class="project-stack">Python, LLM</span>
+                   </div>
+                 </div>  
+                    <div class="project-details">
+                    <!--<h5>Accenture, Bengaluru, India</h5>-->
+                    <ul>
+                      <li>Implemented key features of a compact version of Llama2 in accordance with its official documentation.</li>
+                      <li>Performed sentence completion task given a prefix using temperature sampling for temperatures 0 and 1.</li>
+                      <li>Fine-tuned the model for sentence classification on sst and cfimdb datasets using standard fine tuning and LoRA fine tuning.</li>
+                        <li>Observed <strong style="color:#99d08d">3%</strong> increase in performance on cfimdb dataset using LoRA fine-tuning.</li>
+                      
+                    </ul>
+                    </div>
+                </div>
+
+                 <!-- Project box 3 -->
+                 <div class="project-box">
+                    <div class="project-header">
+                      
+                      <div class="project-info">
+                          <div class="left-group">
+                              <a href="https://github.com/vaishdho1/ML-Models" target="_blank" class="combined-link">
+                                <h3>ML algorithms</h3>
+                                <i class="devicon-github-original-wordmark"></i>
+                              </a>
+                            </div>
+                        <span class="project-stack">Python</span>
+                      </div>
+                    </div>
+                    <div class="project-details">
+                    <!--<h5>Accenture, Bengaluru, India</h5>-->
+                    <ul>
+                      <li>Developed from-scratch implementations of KNN, Random Forest, and Neural Networks—with extensive hyperparameter tuning and cross-validation—applied to the Digits, Titanic, Loan, and Parkinson’s datasets. </li>
+                      <li>Achieved high classification accuracy with the best-performing models reaching over <strong>90%</strong> accuracy on the respective datasets.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="project-box">
+                    <div class="project-header">
+                      <div class="project-info">
+                        <div class="left-group">
+                        <h3>Neural Network Compression </h3>
+                        </div>
+                        <span class="project-stack">Pytorch,Knowledge distillation,Computer Vision</span>
+                      </div>
+                    </div>
+                    <div class="project-details">
+                    <!--<h5>Accenture, Bengaluru, India</h5>-->
+                    <ul>
+                      <li>Explored various knowledge transfer techniques, such as logit matching, feature matching for image classification task on
+                        CIFAR-100 and ImageNet datasets. Experimented with custom architectures to assess trade-offs across evaluation
+                        metrics like accuracy, compression ratio, inference time, and memory usage.</li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+                 
+                <div id="certifications" class="container about-me" style="display: none;">
+                     <div style="text-align: center;">
+                        <h2>Certifications</h2>
+                    </div>
+                    <div class="certifications-child">
+                            <ul style="list-style: none">
+                                <li style= "margin-bottom: 1rem";>
+                                    <a href="https://github.com/vaishdho1/Certifications/blob/main/Datastructures_specialization.pdf" target="_blank" class="combined-link-cert">
+                                        <span class="hyperlink-icon">🔗</span>
+                                        <h3>Data Structures Specialization, Coursera</h3>
+                                        
+                                      </a>
+                                </li>
+                                <li style= "margin-bottom: 1rem";>
+                                <a href="https://github.com/vaishdho1/Certifications/blob/main/Design%20and%20analysis%20of%20algorithms.jpg" target="_blank" class="combined-link-cert">
+                                <span class="hyperlink-icon">🔗</span>
+                                <h3>Design and Analysis of Algorithms, NPTEL </h3>
+                                
+                                </a>
+                            </li>
+                            <li style= "margin-bottom: 1rem";>
+                                <a href="https://github.com/vaishdho1/Certifications/blob/main/Operating%20System%20Fundamentals.jpg" target="_blank" class="combined-link-cert">
+                                <span class="hyperlink-icon">🔗</span>
+                                <h3>Operating System Fundamentals, NPTEL</h3>
+                               
+                                </a>
+                            </li>
+                            <li style= "margin-bottom: 1rem";>
+                               
+                                <a href="https://github.com/vaishdho1/Certifications/blob/main/MicroBachelors%20_%20databases.pdf" target="_blank" class="combined-link-cert">
+                                <span class="hyperlink-icon">🔗</span>
+                                <h3>Introduction to databases, edX</h3>
+                                
+                                </a>
+                            </li>
+                            <li style= "margin-bottom: 1rem";>
+                               
+                                <a href="https://github.com/vaishdho1/Certifications/blob/main/NPTEL%20SUPERSTARS.jpg" target="_blank" class="combined-link-cert">
+                                <span class="hyperlink-icon">🔗</span>
+                                <h3>NPTEL Superstar, NPTEL</h3>
+                                
+                                </a>
+                            </li>
+
+                            <ul>
+                    </div>
+                </div>
+                <div id="contact" class="container" style="display: none;">
+                    <h3 style="color:#165707; margin-top: 5rem;text-align:center">Let's connect!</h3>
+                    <h5 style="color:#247f0f; margin-top: 3rem;">If my work resonates with you or you have a project aligned with my interests, I’d love to explore potential collaborations. Please feel free to reach out!</h5>
+
+
+
+
+
+
+                    </p>
+                  
+                    <div class="contact-list">
+                      <!-- Email row -->
+                      <div class="contact-item">
+                        <img src="https://img.icons8.com/sf-black-filled/64/new-post.png" alt="Email Icon" class="icon-mail" />
+                        <a href="mailto:vpanchavati10@gmail.com" target="_blank" class="contact-link">vpanchavati10@gmail.com</a>
+                      </div>
+                  
+                      <!-- LinkedIn row -->
+                      <div class="contact-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg" alt="LinkedIn Icon" class="icon" />
+                        <a href="https://www.linkedin.com/in/vaishnavi-panchavati/" target="_blank" class="contact-link">
+                          vaishnavi-panchavati
+                        </a>
+                      </div>
+                  
+                      <!-- GitHub row -->
+                      <div class="contact-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" 
+                             alt="GitHub Icon" class="icon" />
+                        <a href="https://github.com/vaishdho1" target="_blank" class="contact-link">
+                          vaishnavi-panchavati
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+            </main>
+
+        </div>
+      
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" \
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

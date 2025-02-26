@@ -1,0 +1,991 @@
+:root{
+    --e: 7rem;
+}
+body{
+    margin-left: 50;
+    margin-right: 50;
+}
+
+header {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    max-width: 1400px;
+    background-color: #f4f4f4; 
+    background-color: rgba(244, 244, 244, 0.9); 
+    /*background-color: rgba(178, 34, 34, 0.9); Using brick red with opacity */
+    padding: 20px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: opacity 0.3s ease; /* Add this line */
+    /* position: fixed;
+    top: 0;
+    padding-top: 1.5rem; 
+    padding-bottom: 1.5rem;
+    opacity: 1;
+    text-align: center;
+    z-index: 99;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: auto;
+    margin-right: auto; */
+}
+
+.header-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #feb47b;
+    border-radius: 40px;
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 1200px; */
+    /* transform: translateX(-50%);
+    width: 90%; */
+}
+
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    transition: color 0.3s ease;
+    
+}
+.nav-links a:hover {
+    color:#60c662;             /* Hover color */
+  }
+  
+.nav-links li {
+    margin: 0 15px;
+}
+  
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+
+.home-container{
+    /*height: 60vh;*/
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    /* width: 100%; */
+    /* height: calc(100vh - 60px); */
+    /* padding-top: 60px; */
+    /* background: linear-gradient(to right, #ff7e5f, #feb47b);*/
+}
+
+.home-child{
+    border: 1px solid;
+    border-radius: 30px;
+    padding: 160px 160px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), 
+    -10px -10px 20px rgba(255, 255, 255, 0.5);
+    background-color: #035139;
+}
+.wave {
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    height: 150px; /* Adjust if you want a bigger wave */
+    overflow: hidden;
+    line-height: 0;
+  }
+  .wave svg {
+    position: relative;
+    display: block;
+    width: calc(132% + 1.3px);
+    height: 100%;
+  }
+
+  .hello-fadein {
+    /* Start hidden and slightly to the left */
+    opacity: 0;
+    transform: translateX(-20px);
+  
+    /* Animate to full opacity and normal position */
+    animation: fadeSlideIn 1.5s forwards ease;
+  }
+  
+  @keyframes fadeSlideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .hello-typewriter {
+    /* Adjust width and steps to match the text's character count.
+       For "Master of Computer Science,University of Massachusetts,Amherst" (62 characters),
+       we set width: 62ch and steps(62, end). */
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 4s steps(62, end) forwards;
+    animation-delay: 1.3s;  /* Wait 1.5s for the fade-in texts to finish */
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to   { width: 62ch; }
+  }
+  
+  
+  
+.about-me{ 
+    /* background-image: linear-gradient(180deg, #5e548e, #2874A6, transparent)  ; */
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding: 2rem;
+    /* border: 1px solid ; */
+
+}
+
+.about-child{
+    border: 1px solid;
+    border-radius: 30px;
+    padding: 120px 120px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), 
+    -10px -10px 20px rgba(255, 255, 255, 0.5);
+    background-color: #06553d;
+}
+.education-box {
+    /* Optional border to replicate the "home-child" style */
+    border: 1px solid;
+    border-radius: 30px;
+    
+    /* Spacing inside and between boxes */
+    padding: 2rem;
+    margin-bottom: 2rem;
+    
+    /* Replicate home page’s box shadow */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2),
+                -10px -10px 20px rgba(255, 255, 255, 0.5);
+    
+    /* Dark background, if desired, plus light text */
+    background-color: #035139;
+    color: #f0f0f0;
+  }
+  /* Header row: contains logo and job info (title & date) */
+.education-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    font-size: 1.6rem;
+  }
+  
+  /* Logo in the top left */
+  .education-logo {
+    flex: 0 0 auto;
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
+    background-color: #fff;;  /* Light green background */
+    padding: 8px;             /* Optional padding for spacing around the logo */
+    border-radius: 50%;       /* Makes the background circular */
+    overflow: hidden;   
+  }
+  .education-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0; /* Optional: make logos circular */
+    /*filter: brightness(0.8) contrast(1);*/
+  }
+  
+  /* Job info on the top right: title and date */
+  .education-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    color:#99d08d;
+  }
+  .education-info h3 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  .education-date {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #b7ff8b;
+  }
+  .education-sub-info {
+    flex: 1;
+    margin-left: 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+    font-size: 1.2rem;
+    color:#cff2c8;
+    
+  }
+  .coursework-sub-info {
+    flex: 1;
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+    font-size: 1.2rem;
+    color:#cff2c8;
+    
+  }
+  .education-sub-info h6 {
+   
+    margin: 0;
+    font-size: 1.4rem;
+   
+  }
+  /* Details section below header row */
+  .education-details {
+    margin-top: 1rem;
+    color:rgb(215, 233, 248);
+    font-size: 1.1rem;
+
+  }
+  .education-details h5 {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: #ff928b;
+  }
+.experience{
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding: 2rem;
+    height: 65vh;
+    /* padding: 4rem; */
+}
+
+.job-description{
+
+}
+
+/* .job-description::-webkit-scrollbar{ */
+    /* background-color: antiquewhite; */
+    /* background-image: linear-gradient(135deg, #014f86, transparent);
+} */
+
+.projects{
+    /* background-color: #2E86C1; */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    /* padding: 4rem; */
+}
+
+#job-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+#job-list li{
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+}
+
+#job-list li:hover{
+    background-color: #e0e0e0;
+}
+
+.card-properties{
+    position: relative;
+    width: 300px;
+    height: 200px; /* Adjust height as needed */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust carousel item to show multiple cards */
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ensure cards take up equal space */
+.carousel-item .col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Custom styles for cards */
+/* .card {
+    margin: 10px;
+    flex: 1 0 auto; 
+} */
+
+.carousel-inner{
+    height: 100%;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.carousel-item{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* .card{
+    margin: 10px;
+} */
+
+.connect{
+    display: inline-block;
+    margin: 10px;
+}
+
+footer {
+    background-color: #333; /* Background color of the footer */
+    color: #fff; /* Text color of the footer */
+    padding: 10px; /* Padding around the content inside the footer */
+    text-align: center; /* Center align the content inside the footer */
+    height: 50px;
+}
+  
+.icon-link {
+    color: inherit; /* Keeps the original color of the SVG */
+    text-decoration: none; /* Removes the underline on hover */
+}
+/*#ff928b*/
+#resume-button {
+    opacity: 0;                 /* hidden initially */
+    animation: fadeIn 1s forwards ease;
+    animation-delay: 5s;        /* starts after line 2 finishes + small pause */
+    display: inline-block;          /* Let it size to content */
+    background-color: #3e9a3f;      /* Button background */
+    color: #fff;                    /* Button text color */
+    border: none;                   /* Remove default border */
+    border-radius: 4px;             /* Slightly rounded corners */
+    padding: 0.75rem 1.5rem;        /* Spacing inside the button */
+    margin-top: 1rem;               /* Space above the button */
+    font-size: 1rem;                /* Button text size */
+    cursor: pointer;                /* Show pointer on hover */
+    text-transform: uppercase;      /* Make text uppercase, optional */
+    /* Make it pill-shaped by setting a large border-radius */
+    border-radius: 9999px; /* or a big number like 50px */
+   
+    /*box-shadow: 0 4px 6px rgba(0,0,0,0.1);  Subtle shadow 
+    transition: background-color 0.3s ease;*/
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  #resume-button:hover {
+    /* Darken the background on hover, optional */
+    background-color: #134f04;
+  }
+
+/* button {
+    font-size: 1.4em;
+    padding: 0.6em 0.8em;
+    border-radius: 0.5em;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 2px 2px 3px #000000b4;
+  } */
+  
+.resume-container {
+    /* position: relative; */
+    /* padding: 3px; */
+    /* background: linear-gradient(90deg, #03a9f4, #f441a5); */
+    border-radius: 0.9em;
+    transition: all 0.4s ease;
+}
+  
+.resume-container::before {
+    /* content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto; */
+    border-radius: 0.9em;
+    /* z-index: -10; */
+    filter: blur(0);
+    transition: filter 0.4s ease;
+}
+  
+.resume-container:hover::before {
+    background: linear-gradient(90deg, #03a9f4, #f441a5);
+    filter: blur(1.2em);
+}
+.resume-container:active::before {
+    filter: blur(0.2em);
+}
+
+.gradient-background {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    height: 100vh;
+}
+
+.project-card {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    height: 100%;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+}
+
+/* .project-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(calc(100%-60px));
+} */
+
+/* .project-card-title { */
+    /* padding: 15px; */
+    /* border-bottom: 1px solid #eee;
+} */
+
+/* .project-card-info { */
+    /* padding: 15px;
+    max-height: 200px; */
+    /* max-height: calc(100% - 60px);
+    overflow-y: auto;
+} */
+
+/* .project-card:not(:hover) .project-card-content { */
+    /* transform: translateY(0);  */
+    /* Adjust based on title height */
+/* } */
+
+.project-card {
+    width: 100%;
+    height: 400px; /* Fixed height, adjust as needed */
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.project-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(calc(100% - 60px)); /* Show only title by default */
+}
+
+.project-card-title {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.project-card-info {
+    padding: 15px;
+    max-height: 340px; /* Adjust based on your needs */
+    overflow-y: auto;
+}
+
+.project-card:hover .project-card-content {
+    transform: translateY(0); /* Rise up on hover */
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+@media (max-width: 1189px) {
+
+    .menu-toggle {
+        display: block;
+      }
+    
+    .header-bar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .nav-dropdown {
+        display: none;
+        width: 100%;
+      }
+    
+      .header-bar.expanded .nav-dropdown {
+        display: block;
+      }
+    nav {
+      width: 100%;
+      display: block;
+    }
+  
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .nav-links li {
+      margin: 10px 0;
+    }
+
+  }
+
+  #home, #about-me, #experience, #projects, #contact {
+    scroll-margin-top: 80px; /* Adjust this value based on your header height */
+  }
+  
+  button:hover {
+    cursor: pointer;
+  }
+  .experience-box {
+    /* Optional border to replicate the "home-child" style */
+    border: 1px solid;
+    border-radius: 30px;
+    
+    /* Spacing inside and between boxes */
+    padding: 2rem;
+    margin-bottom: 2rem;
+    
+    /* Replicate home page’s box shadow */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2),
+                -10px -10px 20px rgba(255, 255, 255, 0.5);
+    
+    /* Dark background, if desired, plus light text */
+    background-color: #035139;
+    color: #f0f0f0;
+  }
+  /* Header row: contains logo and job info (title & date) */
+.exp-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+  }
+  
+  /* Logo in the top left */
+  .exp-logo {
+    flex: 0 0 auto;
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
+    background-color: rgb(223, 236, 247);;  /* Light green background */
+    padding: 3px;             /* Optional padding for spacing around the logo */
+    border-radius: 50%;       /* Makes the background circular */
+    
+  }
+  .exp-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%; /* Optional: make logos circular */
+    /*filter: brightness(0.8) contrast(1);*/
+  }
+  
+  /* Job info on the top right: title and date */
+  .exp-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    color:#99d08d;
+  }
+  .exp-info h3 {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+  .exp-date {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #b7ff8b;
+  }
+  
+  /* Details section below header row */
+  .exp-details {
+    margin-top: 1rem;
+    color:rgb(215, 233, 248);
+    font-size: 1.1rem;
+
+  }
+  .exp-details h5 {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: #ff928b;
+  }
+  .project-box {
+    /* Optional border to replicate the "home-child" style */
+    border: 1px solid;
+    border-radius: 30px;
+    
+    /* Spacing inside and between boxes */
+    padding: 2rem;
+    margin-bottom: 2rem;
+    
+    /* Replicate home page’s box shadow */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2),
+                -10px -10px 20px rgba(255, 255, 255, 0.5);
+    
+    /* Dark background, if desired, plus light text */
+    background-color: #035139;
+    color: #f0f0f0;
+  }
+  .project-header {
+    margin-bottom: 1rem;
+  }
+  
+  /* The main container for heading+icon (left) 
+     and the stack (right) */
+  .project-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* pushes .left-group left, .project-stack right */
+  }
+  .left-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* space between heading & icon */
+  }
+  /* Remove extra heading margin so the icon can sit snugly beside it */
+.left-group h3 {
+    margin: 0;
+    font-size: 1.6rem;  /* heading size */
+    color: #99d08d;      /* heading color */
+  }
+  
+  .left-group:hover {
+    color: #fa9150;        /* hover color */
+  }
+  .heading-link {
+    text-decoration: none;
+    color: #99d08d; /* or your preferred color */
+    display: flex; /* so it can align with the h3 nicely */
+    align-items: center;
+  }
+  
+  .heading-link h3 {
+    margin: 0;
+    font-size: 1.6rem; 
+    color: inherit; /* use the anchor's color */
+  }
+  
+  /* On hover, change color if you wish */
+  .heading-link:hover {
+    color: #fa9150;
+  }
+  
+  
+  /* Icon styling */
+  .github-icon {
+    font-size: 1.8rem;  /* match heading size or smaller if desired */
+    color: #dfe7dd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .project-details {
+    margin-top: 1rem;
+    color:rgb(215, 233, 248);
+    font-size: 1.1rem;
+  }
+  
+  
+  .github-icon:hover {
+    color: #fa9150;        /* hover color */
+  }
+    
+  /* Tech stack on the far right */
+  .project-stack {
+    font-size: 1rem;  /* smaller or bigger than heading as you prefer */
+    color: #b7ff8b;
+    font-weight: bold;
+  }
+  .combined-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #99d08d;  /* default color */
+    transition: color 0.3s ease;
+  }
+  
+  /* Ensure the heading and icon inherit the anchor color */
+  .combined-link h3,
+  .combined-link i {
+    font-size: 2rem;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+  
+  /* On hover, explicitly set both heading and icon colors */
+  .combined-link:hover,
+  .combined-link:hover h3,
+  .combined-link:hover i {
+    color: #f97651;
+  }
+  
+  .certifications-child {
+    border: 1px solid;
+    border-radius: 30px;
+    padding: 2rem; /* Decrease or increase as you like */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2),
+                -10px -10px 20px rgba(255, 255, 255, 0.5s);
+    background-color: #06553d;
+    text-align: left; /* Ensures text is left-aligned */
+    color:#99d08d;
+    font-size:0.8rem;
+  }
+  
+  /* The unordered list of certifications */
+  .cert-list {
+    list-style-type: disc;  /* or circle, square, or none */
+    margin: 0;
+    padding-left: 2rem;     /* indent bullets a bit */
+  }
+  
+  /* Each list item is displayed on its own line */
+  .cert-list li {
+    margin-bottom: 1rem;    /* space between items */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .combined-link-cert {
+    display: inline-flex;        /* keep heading & icon in one row */
+    align-items: center;
+    gap: 0.5rem;                 /* spacing between heading & icon */
+    text-decoration: none;       /* remove underline */
+    color: #99d08d;              /* default color */
+    transition: color 0.3s ease;
+  }
+  
+  /* Make the heading large but keep the color inherited from the anchor */
+  .combined-link-cert h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: inherit;
+  }
+  
+  /* Icon can match heading size (or be smaller) */
+  .combined-link-cert i {
+    font-size: 1.2rem;  /* match heading size */
+    color: inherit;
+  }
+  
+  /* Hover effect changes color of both heading and icon */
+  .combined-link-cert:hover {
+    color: #f7884d;        /* or any hover color you prefer */
+  }
+  
+  /* Remove extra heading margin so the icon can sit snugly beside it */
+.left-group h3 {
+    margin: 0;
+    font-size: 1.2rem;  /* heading size */
+    color: #99d08d;      /* heading color */
+  }
+  .heading-link {
+    text-decoration: none;
+    color: #99d08d; /* or your preferred color */
+    display: flex; /* so it can align with the h3 nicely */
+    align-items: center;
+  }
+  .hyperlink-icon {
+    font-size: 24px;       /* adjust size as needed */
+    color: #333;           /* default color */
+    text-decoration: none; /* remove underline */
+    transition: color 0.3s ease;
+  }
+  /* Fade-in animation that starts with a slight downward offset */
+.fade-in {
+    opacity: 0;
+    animation: fadeInAnimation 0.5s ease forwards;
+    animation-delay: 0.3s; /* Delay before animation starts */
+  }
+  
+  @keyframes fadeInAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Header row: contains logo and job info (title & date) 
+.project-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .project-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.8rem;
+    color:#99d08d;
+  }
+  .left-group {
+    display: flex;
+    align-items: center; 
+    gap: 0.5rem; /* Space between heading and icon 
+  }
+  
+  .left-group h3 {
+    margin: 0;  /* Remove default heading margin if needed 
+  }
+  .project-stack {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #b7ff8b;
+  }
+  
+  /* Remove default margin so heading & icon align neatly 
+  .project-info h3 {
+    margin: 0;
+  }
+  
+  /* Style the icon as you like 
+  .github-icon {
+    font-size: 24px;  /* adjust icon size 
+    color: #333;      /* default color 
+    transition: color 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .github-icon:hover {
+    color: #6e5494;   /* hover color 
+  }
+  */
+  /* Container for the entire list */
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* left-align everything */
+    gap: 1rem;              /* vertical spacing between rows */
+    margin: 1rem 0;         /* spacing around the list */
+  }
+  
+  /* Each contact row: icon + link in one horizontal line */
+  .contact-item {
+    display: flex;
+    align-items: center; 
+    gap: 0.5rem;           /* space between icon and text */
+  }
+  
+  /* Force icons to a consistent size so they align perfectly */
+  .icon {
+    width: 40px; 
+    height: 40px;
+    object-fit: contain;   /* ensures the entire icon is visible */
+  }
+  .icon-mail {
+    width: 50px; 
+    height: 50px;
+    object-fit: contain;   /* ensures the entire icon is visible */
+  }
+  
+  
+  /* Style the link text, using your green color if desired */
+  .contact-link {
+    text-decoration: none;
+    color: #247b10;         /* or your preferred color */
+    transition: color 0.3s ease;
+  }
+  
+  /* Hover effect for the link */
+  .contact-link:hover {
+    color: #d75e2f;            /* changes to white on hover, for example */
+  }
+  .light-text {
+    font-weight: 300; /* or normal, or a lighter color if desired */
+    color: #6cca43;      /* optional: set a lighter color */
+  }
+  .technical-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    color:#99d08d;
+  }
+  .tecnical-info h4 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  .technical-sub-info {
+    flex: 1;
+    margin-left: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+    font-size: 1.2rem;
+    color:#cff2c8;
+    
+  }
+  .coursework-box {
+    background-color: #06553d; 
+    border: 1px solid;
+    border-radius: 30px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2),
+                -10px -10px 20px rgba(255, 255, 255, 0.5);
+    color: #f0f0f0;
+  
+    /* Center horizontally */
+    width: 50%;         /* or any fixed width (px, %, rem) you prefer */
+    margin: 0 auto;     /* auto left/right margins center the box */
+  
+    /* Spacing inside the box */
+    padding: 2rem;
+    justify-content: space-between;
+    align-items: right;
+    font-size: 1.2rem;
+    color:#cff2c8;
+  }
+  
+ 
