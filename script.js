@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.getElementById("resume-button").addEventListener("click", function() {
     // URL of your resume
-    var resumeUrl = "assets/Vaishnavi_Panchavati.pdf";
+    var resumeUrl = "assets/vaishnavi_resume_up.pdf";
     // Open the resume in a new tab
     window.open(resumeUrl, "_blank");
 });
