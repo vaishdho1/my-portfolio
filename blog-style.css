@@ -415,7 +415,7 @@ figcaption {
 /* --- Responsive Styles for Mobile --- */
 /* =================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     body {
         padding: 0.5rem;
     }
@@ -426,7 +426,7 @@ figcaption {
         padding: 1.5rem;
         padding-top: 6rem; /* Add space at the top for the links */
     }
-
+    
     /* Change the header links to stack vertically and center */
     .header-links {
         top: 1.5rem;
