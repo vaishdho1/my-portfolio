@@ -409,3 +409,62 @@ figcaption {
 .header-links a:hover {
     color: #035139; /* Your dark green hover color */
 }
+/* In blog-style.css */
+
+/* =================================== */
+/* --- Responsive Styles for Mobile --- */
+/* =================================== */
+
+@media (max-width: 768px) {
+
+    /* --- General Layout --- */
+    body {
+        padding: 1rem; /* Reduce body padding */
+    }
+
+    .blog-container {
+        /* Make content box take up more screen width */
+        width: 100%;
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+
+
+    /* --- Header Links --- */
+    /* This is the key fix for the cluttered header */
+    .blog-header {
+        /* Stack the header items vertically */
+        flex-direction: column;
+        gap: 1.5rem; /* Add space between stacked items */
+    }
+
+    /* We no longer need absolute positioning on mobile */
+    .email-link,
+    .project-links {
+        position: static;
+        /* Center align the links */
+        text-align: center;
+    }
+
+
+    /* --- Typography --- */
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+
+    /* --- Image Grids --- */
+    .image-layout-diamond {
+        /* Make the grid a single column */
+        grid-template-columns: 1fr;
+    }
+
+    .grid-col-span-center {
+        /* Allow centered images to take more width */
+        width: 80%;
+    }
+}

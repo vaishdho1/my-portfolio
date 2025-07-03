@@ -1092,3 +1092,74 @@ text-align: center; /* Add this line to center the text */
   color: white;
   border-color: #035139;
 }
+/* In styles.css */
+
+/* =================================== */
+/* --- Responsive Styles for Mobile --- */
+/* =================================== */
+
+@media (max-width: 768px) {
+
+  /* --- General Body & Header --- */
+  body {
+      /* Remove large side margins on mobile */
+      margin-left: 0;
+      margin-right: 0;
+  }
+
+  header {
+      /* Make header take up more width on mobile */
+      width: 95%;
+  }
+
+
+  /* --- Home Section --- */
+  .home-child {
+      /* Reduce padding to fit smaller screens */
+      padding: 60px 30px;
+  }
+
+  .hello-typewriter {
+      /* Prevent long text from overflowing */
+      white-space: normal;
+      width: auto;
+      animation: none; /* Disable typewriter animation on mobile */
+  }
+
+
+  /* --- About Me Section --- */
+  .education-box, .project-box {
+      /* Reduce padding */
+      padding: 1.5rem;
+  }
+
+  .education-info h3 {
+      font-size: 1.2rem;
+  }
+
+  .education-sub-info {
+      /* Stack degree info below university on smaller screens */
+      margin-left: 0;
+      text-align: left;
+  }
+
+  .coursework-box {
+      /* Allow coursework box to take full width */
+      width: 90%;
+  }
+
+
+  /* --- Technical Skills Section --- */
+  .tech-skills-box .card-body {
+      /* Allow icons to wrap instead of overflowing */
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+
+
+  /* --- Contact Section --- */
+  .contact-list {
+      /* Center contact items on mobile */
+      align-items: center;
+  }
+}
