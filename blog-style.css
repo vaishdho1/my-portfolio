@@ -416,53 +416,39 @@ figcaption {
 /* =================================== */
 
 @media (max-width: 768px) {
-
-    /* --- General Layout --- */
     body {
-        padding: 1rem;
+        padding: 0.5rem;
     }
 
     .blog-container {
         width: 100%;
         max-width: 100%;
         padding: 1.5rem;
+        padding-top: 6rem; /* Add space at the top for the links */
     }
 
-
-    /* --- THIS IS THE KEY FIX FOR THE OVERLAPPING HEADER --- */
-    .blog-header {
-        /* Stack the header items vertically */
-        flex-direction: column;
-        /* Center them horizontally */
-        align-items: center;
-        gap: 1.5rem;
+    /* Change the header links to stack vertically and center */
+    .header-links {
+        top: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%); /* Center the container */
+        width: auto;
+        gap: 1rem;
     }
 
-    .email-link,
-    .project-links {
-        /* This tells the elements to ignore top/left/right and just stack normally */
+    .email-link {
+        /* Remove corner positioning for mobile */
         position: static;
-    }
-    
-    .project-links {
-        /* This ensures the right-side links also stack vertically on mobile */
-        flex-direction: column;
+        text-align: center;
+        margin-bottom: 1rem;
     }
 
-
-    /* --- Typography --- */
     h1 {
         font-size: 1.8rem;
     }
 
-    h4 {
-        font-size: 1.2rem;
-    }
-
-
-    /* --- Image Grids --- */
     .image-layout-diamond {
-        grid-template-columns: 1fr; /* Make the grid a single column */
+        grid-template-columns: 1fr;
     }
 
     .grid-col-span-center {
