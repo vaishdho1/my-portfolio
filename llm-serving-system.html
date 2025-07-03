@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Blog Post Title</title>
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    
+        <link rel="stylesheet" href="blog-style.css">
+    </head>
+<body>
+
+    <div class="blog-container">
+        <div class="header-links">
+           
+            <a href="https://github.com/vaishdho1/Model-Serving-System" target="_blank" title="Project Repository">
+                <i class="devicon-github-original"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/your-profile/" target="_blank" title="LinkedIn">
+                <i class="devicon-linkedin-plain"></i>
+            </a>
+        </div>
+        <h1>LLM Serving System</h1>
+        
+        <div class="blog-meta">
+            <span class="blog-tag">LLM</span>
+            <span class="blog-tag">System Design</span>
+            <span class="blog-tag">Infrastructure</span>
+        </div>
+
+        <p class="blog-date">July 2, 2025</p>
+        <div class="email-link">
+            <a href="mailto:vpanchavati10@gmail.com" title="Email">
+                vpanchavati10@gmail.com
+            </a>
+           
+        </div>
+        
+
+        
+        <p>Ever wonder how language models stream responses word by word while juggling hundreds of users and still staying responsive? That question led me down the rabbit hole of real-time inference infrastructure. I wanted to peel back the layers and understand what it really takes to serve large models efficiently under load, with low latency, and without crashing the system. So I started a self-driven project to build a complete LLM serving system from scratch, exploring the layers of complexity that lie between receiving a prompt and delivering a streamed response.</p>
+        <p>This blog walks through that system: how it's architected, the real problems it solves, and the thinking behind each design decision. If you're curious about the systems side of LLMs, you're in the right place.</p>
+
+        <h4>Challenges</h4>
+        <p>Before diving into how the system works, let’s first understand why serving LLMs is far from trivial. From performance expectations to fault handling, the challenges are surprisingly deep involving many moving parts that must work seamlessly together under pressure.</p>
+        <ul>
+            <li>Users expect interactive, streaming outputs.</li>
+            <li>The system must scale with load and efficiently handle thousands of concurrent requests.</li>
+            <li>Requests need to be routed intelligently to the appropriate execution nodes based on availability and load, often spanning multiple VMs.</li>
+            <li>Partial failures are common — components can crash, networks fail, and the system must gracefully handle these events.</li>
+            <li>The system must remain observable at every layer to support autoscaling, debugging, and optimization.</li>
+        </ul>
+        <p>This system was built with these challenges at its core, shaping the design of the components you'll explore next.</p>
+
+        <h4>System Overview</h4>
+        <!-- <img src="images/control-plane.png" alt="Control plane of the LLM serving system" class="blog-image"> -->
+
+        <p>This is a microservices based distributed system built on an async, event-driven architecture. Each service operates independently and communicates internally over gRPC. The system runs across multiple nodes(in this case, VMs) where:</p>
+        <ul>
+            <li>The <strong>Head node</strong> hosts the Head Controller and the HTTP Proxy.</li>
+            <li>The <strong>Worker nodes</strong> run the Scheduler and their associated Replicas.</li>
+        </ul>
+        <p>Here are the core building blocks:</p>
+        <ul>
+            <li><strong>HTTP Proxy</strong> — The entrypoint that handles incoming requests and balances traffic.</li>
+            <li><strong>Head Controller</strong> — The orchestrator that maintains system health and deployment state.</li>
+            <li><strong>Scheduler</strong> — The intermediate layer that manages replicas.</li>
+            <li><strong>Replica</strong> -The execution unit that runs the model and streams back tokens.</li>
+        </ul>
+        <p>We’ll now break these down in more depth across the control and data planes.</p>
+            
+        <h4>Architecture Overview</h4>
+        <p>With the system’s components introduced, the next step is to see how they interact. To simplify this, the architecture is organized into two complementary planes:</p>
+        <ul>
+            <li><strong>Control Plane</strong> — Manages system health, deployment state, and routing updates.</li>
+            <li><strong>Data Plane</strong> — Handles model execution and token streaming.</li>
+        </ul>
+        <p>While the same services participate in both, their behavior and responsibilities shift depending on which plane they’re operating in. Let’s look at each in turn.</p>
+        
+        <h3>Control Plane</h3>
+        <figure>
+            <img src="images/control-plane.png" alt="Control plane of the LLM serving system" class="blog-image">
+            <figcaption>
+                <b>Figure 1:</b> Control plane of the LLM serving system
+            </figcaption>
+        </figure>
+        <p>At the heart of the control plane is the Head Controller. It acts as the system's central coordinator:</p>
+        <ul>    
+            <li>Registers and tracks active schedulers</li>
+            <li>Keeps routing table with mapping between deployment and replicas</li>
+            <li>Pushes replica assignments to those schedulers</li>
+            <li>Manages life cycle of HTTP Proxy</li>
+            <li>Broadcasts routing updates to the HTTP proxy using a pub-sub model</li>
+            <li>Collects and interprets health metrics from the schedulers to maintain global system integrity</li>
+        </ul>
+        <p> Schedulers act as a bridge between the control and data planes. Their responsibilities in the control plane include:</p>
+        <ul>
+            <li>Registering with the Head Controller when they start</li>
+            <li>Receiving assignment instructions from the Head Controller</li>
+            <li>Monitoring local replica life cycle using instructions from the Head Controller</li>
+            
+        </ul>
+        <p>The HTTP Proxy, while primarily responsible for handling requests in the data plane, participates in the control plane by subscribing to routing table updates from the Head Controller using a gRPC based pub-sub model. This ensures the proxy stays in sync with the latest deployment state and routes traffic only to healthy and available backends.</p>
+        
+
+
+        <h3>Data Plane</h3>
+        <p>The data plane handles all client traffic and inference.</p>
+        <figure>
+            <img src="images/data-plane.png" alt="Architecture block diagram..." class="blog-image">
+            <figcaption>
+                <b>Figure 2:</b> The figure shows the flow of live requests 
+            </figcaption>
+        </figure>
+        
+        <p> <p>This layer is built for concurrency, responsiveness, and throughput. It orchestrates the flow of user requests through the proxy, routes them to backend workers, and ensures the output is streamed efficiently and reliably</p>
+        <p>The HTTP Proxy runs a stateless, async FastAPI server on the frontend to handle incoming HTTP requests from clients, and communicates with backend schedulers using an async gRPC client. It:</p>
+        <ul>
+            <li>Receives user prompts via POST requests</li>
+            <li>Uses a local routing table (pushed from the controller) to forward requests to a scheduler</li>
+            <li>Includes a lightweight load balancer that selects the least loaded replica for optimal distribution</li>
+            <li>Streams token responses back as they are generated.</li>
+        </ul>
+
+        <p>Schedulers act as intermediaries between the proxy and the replicas in the data plane. They:</p>
+        <ul>
+            <li>Receive inference requests from proxies via gRPC</li>
+            <li>Place those requests into the appropriate replica queues</li>
+            <li>Forward requests asynchronously to replicas for execution</li>
+        </ul>
+        <p>Replica is a subprocess responsible for running the actual inference workload. It:
+            <ul>    
+            <li>Loads a specific LLM model (e.g., TinyLlama)</li>
+            <li>Accepts gRPC requests from the scheduler</li>
+            <li>Processes input prompts using vLLM's continuous batching engine</li>
+            <li>Streams tokens back incrementally</li>
+
+            </ul>
+        <p>Together, these components form the backbone of a real time, distributed inference system.</p>
+        <h4>Design Decisions</h4>
+        <p>Let’s talk about a few of the core architectural choices behind this system and more importantly, why they were made. Each one was driven by practical needs uncovered during implementation. </p>
+        <ul>
+            <li><strong>gRPC</strong>- I chose gRPC because real time streaming is essential when working with token based LLM outputs. gRPC provides bi-directional streaming and Protobuf based contracts that make communication between services efficient and strongly typed. It also gave me structured APIs and easy versioning as the system evolved.</li>
+            <li><strong>Async</strong>- Most operations in this system, from streaming token output to inter-service communication, are IO bound. To keep the system responsive under load, I designed it around async programming. All major components use non-blocking async def functions, enabling efficient concurrency without thread contention.</li>
+            <li><strong>Pub-Sub for Proxy Updates</strong>-Polling for routing updates adds overhead by repeatedly checking for changes that may not exist. Instead, the proxy subscribes to the Head Controller at startup, and updates are pushed only when routing configuration changes. This approach reduces load and also supports future horizontal scaling 
+            <li><strong>Scheduler</strong>- The Scheduler serves as a key intermediary between the proxy and replicas. Rather than letting the proxy send requests directly to each replica, the scheduler centralizes replica coordination and keeps the proxy logic clean and lightweight. This also helps in isolating the Head Controller from directly interacting with the replicas.</li>
+            <li><strong>Replica Isolation</strong>- Each replica runs in its own process to ensure failures are contained and don't affect other replicas. This also makes it easier to scale replicas independently.</li>
+            <li><strong>vLLM integration</strong>- vLLM is a library that provides a high performance, flexible, and easy to use framework for building LLM applications. It supports continuous batching and efficient token streaming, both of which dramatically increase throughput.</li>
+        </ul>
+        
+        <h4>Deployment Setup</h4>
+        <p>Before benchmarking the system, I deployed it entirely on virtual machines (VMs) in AWS, using a containerized deployment flow that ensured reproducibility and fast scaling.</p>
+        <ul>
+        <li><strong>Controller Deployment:</strong> The controller was packaged as a Docker image and pushed to AWS ECR. An EC2 instance (c5.large) was provisioned using an automated deployment script, which installs Docker, pulls the image, and runs the controller with exposed ports.</li>
+        
+        <li><strong>System Bootstrap:</strong> Once running, the controller initializes all its internal managers (deployment, health, autoscale), spins up the HTTP proxy, and listens for schedulers to register. It also provisions 4 additional EC2 VMs with A10 GPU and 16GB VRAM to host the scheduler services.</li>
+        
+        <li><strong>Scheduler Containerization:</strong> Like the controller, the scheduler was also containerized and pushed to ECR. When a new VM is created for a scheduler, it pulls the image and runs the scheduler service inside a Docker container enabling consistent lifecycle management across all worker nodes.</li>
+        <li><strong>Monitoring setup:</strong> A similar containerized setup was used for Prometheus and Grafana. Once the monitoring VM launched, it pulled the prebuilt images from ECR and ran both services. Prometheus scraped metrics from the proxy and replicas every 5 seconds, and Grafana was used to visualize them.</li>
+
+        </li>
+    </ul>
+        <h4>Load Testing & Evaluation</h4>
+        <p>To evaluate the system’s performance under concurrent traffic, I used Locust to simulate real user load against the deployed infrastructure.</p>
+        <p>This section focuses on one representative test case to illustrate the system's behavior under load. Additional test scenarios will be added to the repo linked below.</p>
+        <h3>Load Test Insights</h3>
+        <div class="image-layout-diamond">
+
+            <figure class="grid-col-span-center">
+                <img src="images/locust.png" alt="Graph showing end-to-end latency" class="blog-image">
+                <figcaption><b>Figure 3:</b> Locust test results</figcaption>
+            </figure>
+        
+            <figure>
+                <img src="images/ttft_95.png" alt="Graph showing Time to First Token" class="blog-image">
+                <figcaption><b>Figure 4:</b> 95th percentile of TTFT(Prometheus)</figcaption>
+            </figure>
+        
+            <figure>
+                <img src="images/vllm_e2e.png" alt="Graph showing requests per replica" class="blog-image">
+                <figcaption><b>Figure 5:</b> 95th percentile of vLLM end-to-end latency(Prometheus)</figcaption>
+            </figure>
+        
+            <figure class="grid-col-span-center">
+                <img src="images/replica_running.png" alt="Another graph metric" class="blog-image">
+                <figcaption><b>Figure 6:</b> Requests running per replica(Prometheus)</figcaption>
+            </figure>
+        
+        </div>
+        <ul>
+            <li>The system was tested using Locust with up to 1,000 concurrent users, simulating realistic traffic patterns.</li>
+            <li>Each request used a medium length prompt of 300–500 tokens and requested up to 500 output tokens.</li>
+            <li>All requests were served by 4 active replicas running the TinyLlama model, deployed on separate VMs with A10G GPU and 16GB VRAM.</li>
+            <li>During the test, the system sustained 80–100 requests per second consistently, with very low failure rates.</li>
+        </ul>
+        <p>Prometheus metrics were monitored alongside Locust to capture deeper infrastructure behavior:</p>
+        <ul>
+            <li><strong>System responsiveness -</strong> 95th percentile TTFT stayed between 3–4 seconds under normal load and rose above 10s during bursty traffic (14:05–14:10)</li>
+            <li><strong>Inference latency -</strong> 95th percentile end-to-end inference latency ranged from 20–30s in steady state and peaked at 60s, closely matching Locust's global response time trends. This correlation reinforces that the primary delay stems from model inference itself, not the serving infrastructure.
+            <li><strong>Load balancing -</strong> Load was balanced effectively, with each replica handling 100–200 concurrent requests. I observed a momentary spike on individual replicas, which is an expected artifact of the "least-loaded" routing strategy during intense request bursts. While the system self corrects in seconds, a future refinement could use a Round-robin strategy to guarantee even distribution.
+        <p>These metrics confirm that system overhead was minimal, the latency increase came from the model itself, not the control or data pipeline. Load was distributed evenly, and system responsiveness was preserved under pressure.
+        <h4>Future Improvements</h4>
+    <p>As the system evolves, there are a few key areas I’d like to build which include:</p>
+    <ul>
+        <li><strong>Autoscaling with SLOs:</strong> Dynamically scale replicas based on response times and queue depth.</li>
+        <li><strong>Persistent Storage:</strong> Explore storage options for presistence and fault tolerance.</li>
+        <li><strong>Model Optimization:</strong> Explore smarter batch aware scheduling, higher GPU utilization through better packing, running multiple models per node, and support for quantized inference (4-bit/8-bit) to improve performance and resource efficiency. </li>
+    </ul>
+    <p>I plan to explore each in detail in future blog posts.</p>
+
+    <h4>Closing Thoughts</h4>
+    <p>This project gave me a hands on understanding of what it takes to build a streaming inference engine from the ground up. Confronting real world bottlenecks and user traffic taught me that great infrastructure is a constant balance of trade-offs.
+        <p> If you're building in this space, I'd love to connect. I'm always open to hearing new ideas, discussing alternative designs, or exploring potential collaboration.</p>
+        <p class="project-link">
+            You can find the full project here: 
+            <a href="https://github.com/vaishdho1/Model-Serving-System" target="_blank">
+                GitHub - Model Serving System
+            </a>
+        </p>
+       </div>
+
+</body>
+</html>
+
+
+
+
