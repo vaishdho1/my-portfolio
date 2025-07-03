@@ -419,31 +419,34 @@ figcaption {
 
     /* --- General Layout --- */
     body {
-        padding: 1rem; /* Reduce body padding */
+        padding: 1rem;
     }
 
     .blog-container {
-        /* Make content box take up more screen width */
         width: 100%;
         max-width: 100%;
         padding: 1.5rem;
     }
 
 
-    /* --- Header Links --- */
-    /* This is the key fix for the cluttered header */
+    /* --- THIS IS THE KEY FIX FOR THE OVERLAPPING HEADER --- */
     .blog-header {
         /* Stack the header items vertically */
         flex-direction: column;
-        gap: 1.5rem; /* Add space between stacked items */
+        /* Center them horizontally */
+        align-items: center;
+        gap: 1.5rem;
     }
 
-    /* We no longer need absolute positioning on mobile */
     .email-link,
     .project-links {
+        /* This tells the elements to ignore top/left/right and just stack normally */
         position: static;
-        /* Center align the links */
-        text-align: center;
+    }
+    
+    .project-links {
+        /* This ensures the right-side links also stack vertically on mobile */
+        flex-direction: column;
     }
 
 
@@ -459,12 +462,10 @@ figcaption {
 
     /* --- Image Grids --- */
     .image-layout-diamond {
-        /* Make the grid a single column */
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Make the grid a single column */
     }
 
     .grid-col-span-center {
-        /* Allow centered images to take more width */
         width: 80%;
     }
 }
