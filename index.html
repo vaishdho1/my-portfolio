@@ -8,7 +8,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet " href="styles.css">
 
         <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
           
@@ -26,6 +26,7 @@
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="#blogs">Blogs</a></li>
                     <li><a href="#contact">Contact</a></li>
                   </ul>
                 </nav>
@@ -227,7 +228,33 @@
                     <!-- </div>                                                                                                    -->  
                 
                 </div>
-
+                <div id="blogs" class="container blogs" style="display: none;">
+                  <div style="text-align: center; margin-bottom: 1.5rem;">
+                      <h2 style="color:#044531">Blogs</h2>
+                  </div>
+              
+                  <div class="blog-filters">
+                      <button class="active" data-filter="all">All</button>
+                      <button data-filter="llm">LLM</button>
+                      <button data-filter="system">System Design</button>
+                     
+                  </div>
+              
+                  <div class="blog-post-list">
+                      <div class="blog-post-link" data-tags="llm system">
+                          <a href="llm-serving-system.html" target="_blank">
+                              <div class="blog-meta">
+                                  <span class="blog-tag">LLM</span>
+                                  <span class="blog-tag">System Design</span>
+                              </div>
+                              <h3>LLM Serving System</h3>
+                              <p class="blog-link-date">July 2, 2025</p>
+                              <p class="blog-summary">A deep dive into how I built a real-time, distributed LLM serving system from scratch.</p>
+                          </a>
+                      </div>
+      
+                  </div>
+              </div>
                    
                 
                 <div id="experience" class="container experience" style="display: none;">
@@ -318,15 +345,16 @@ cloud test system, reducing datapath errors by <strong style="color:#99d08d">60%
                             <i class="devicon-github-original-wordmark"></i>
                           </a>
                         </div>
-                        <span class="project-stack">Python, Kubernetes, Go</span>
+                        <span class="project-stack">Python, AWS, gRPC</span>
                       </div>
                     </div>
                     <div class="project-details">
                     <!--<h5>Accenture, Bengaluru, India</h5>-->
                     <ul>
-                      <li>Built a distributed LLM serving system with gRPC and Python, supporting autoscaling, model caching, fault
-tolerance, dynamic model loading, and MongoDB backed persistence.</li>
-                      <li>Deployed the system using a custom Kubernetes Operator and Prometheus for real-time performance monitoring.</li>
+                      <li>Building a distributed, fault-tolerant LLM serving system with gRPC and FastAPI based control APIs,
+                        supporting autoscaling, model caching, fault tolerance, dynamic model loading, and Redis backed persistence.</li>
+                      <li>Deployed the system on AWS with Docker containers and prometheus based monitoring, achieving 70% reduction in
+                        operational overhead.</li>
                     </ul>
                   </div>
                 </div>

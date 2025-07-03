@@ -988,4 +988,107 @@ footer {
     color:#cff2c8;
   }
   
- 
+ /* Add this to your styles.css file */
+
+/* Add this to your styles.css file */
+
+/* Styling for the blog list on the main page */
+
+.blog-post-link {
+  display: block;
+  background-color: #035139; /* The dark green background */
+  border-radius: 30px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2),
+              -10px -10px 20px rgba(255, 255, 255, 0.5);
+  transition: transform 0.2s ease-in-out;
+}
+
+.blog-post-link:hover {
+  transform: translateY(-5px); /* Lifts the box on hover */
+}
+
+/* This makes the whole box a link without default blue/underline style */
+.blog-post-link a {
+  text-decoration: none;
+  display: block;
+}
+
+/* --- Styles for elements INSIDE the link box --- */
+
+.blog-meta {
+  margin-bottom: 0.75rem; /* Space below the tags */
+}
+
+.blog-tag {
+  display: inline-block;
+  background-color: #e0eafc; /* Light blue background */
+  color: #3b5998; /* Darker blue text */
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.blog-post-link h3 {
+  color: #99d08d; /* Your preferred title color */
+  font-size: 1.6rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.blog-post-link:hover h3 {
+  color: #f97651; /* Hover color for the title */
+}
+
+.blog-link-date {
+  color: #b7ff8b; /* Your preferred date color */
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-summary {
+  color: #cff2c8; /* Light summary text color */
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+h4 {
+color: #165707;
+margin-top: 2.5rem;
+text-align: center; /* Add this line to center the text */
+}
+/* In styles.css */
+
+/* --- Styling for Blog Filter Buttons --- */
+.blog-filters {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.blog-filters button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.blog-filters button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Style for the currently selected filter button */
+.blog-filters button.active {
+  background-color: #035139; /* Your dark green color */
+  color: white;
+  border-color: #035139;
+}

@@ -47,11 +47,74 @@ document.addEventListener('DOMContentLoaded', function () {
 //        })
 //    })
 //})
+// --- NEW: Code for the clickable blog titles (with Read More) ---
+const blogTitleLinks = document.querySelectorAll('.blog-title-link');
 
+blogTitleLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevents link from navigating
+
+        // Find the parent .blog-post-content container
+        const contentContainer = this.nextElementSibling;
+        
+        // Find the preview and full content within that container
+        const preview = contentContainer.querySelector('.blog-preview');
+        const fullContent = contentContainer.querySelector('.blog-full-content');
+
+        // Check if the full content is currently hidden
+        if (fullContent.style.display === 'none' || fullContent.style.display === '') {
+            // If hidden, hide the preview and show the full content
+            preview.style.display = 'none';
+            fullContent.style.display = 'block';
+        } else {
+            // Optional: If you want to be able to click again to hide the full content
+            // and show the preview again, uncomment the lines below.
+            // preview.style.display = 'block';
+            // fullContent.style.display = 'none';
+        }
+    });
+});
+// In script.js
+
+// --- Blog Post Filtering Logic ---
+document.addEventListener('DOMContentLoaded', function() {
+  // Select all the filter buttons and all the blog post items
+  const filterButtons = document.querySelectorAll('.blog-filters button');
+  const blogPosts = document.querySelectorAll('.blog-post-link');
+
+  // Make sure we found the buttons before adding listeners
+  if (filterButtons.length > 0 && blogPosts.length > 0) {
+      
+      filterButtons.forEach(button => {
+          button.addEventListener('click', function() {
+              // 1. Update the active button state
+              // First, remove 'active' class from all buttons
+              filterButtons.forEach(btn => btn.classList.remove('active'));
+              // Then, add 'active' class to the button that was just clicked
+              this.classList.add('active');
+
+              // 2. Get the filter value from the clicked button
+              const filterValue = this.getAttribute('data-filter');
+
+              // 3. Loop through all blog posts and show/hide them
+              blogPosts.forEach(post => {
+                  const postTags = post.getAttribute('data-tags');
+
+                  // Check if the post should be visible
+                  if (filterValue === 'all' || postTags.includes(filterValue)) {
+                      post.style.display = 'block'; // Show the post
+                  } else {
+                      post.style.display = 'none'; // Hide the post
+                  }
+              });
+          });
+      });
+  }
+});
 
 document.getElementById("resume-button").addEventListener("click", function() {
     // URL of your resume
-    var resumeUrl = "assets/vaishnavi_resume_up1.pdf";
+    var resumeUrl = "assets/vaishnavi_resume.pdf";
     // Open the resume in a new tab
     window.open(resumeUrl, "_blank");
 });
