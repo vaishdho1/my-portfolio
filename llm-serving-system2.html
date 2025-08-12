@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LLM Serving System</title>
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    
+        <link rel="stylesheet" href="blog-style.css">
+    </head>
+<body>
+
+    <div class="blog-container">
+        
+        <h1>LLM Serving System: V2</h1>
+        
+        <div class="blog-meta">
+            <span class="blog-tag">LLM</span>
+            <span class="blog-tag">System Design</span>
+            <span class="blog-tag">Infrastructure</span>
+        </div>
+
+        <p class="blog-date">August 12, 2025</p>
+        <div class="email-link">
+            <a href="mailto:vpanchavati10@gmail.com" title="Email">
+                vpanchavati10@gmail.com
+            </a>
+           
+        </div>
+        <div class="header-links">
+           
+            <a href="https://github.com/vaishdho1/Model-Serving-System" target="_blank" title="Project Repository">
+                <i class="devicon-github-original"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/your-profile/" target="_blank" title="LinkedIn">
+                <i class="devicon-linkedin-plain"></i>
+            </a>
+        </div>
+        
+
+        
+        <p>In my <a href="https://vaishdho1.github.io/my-portfolio/llm-serving-system.html" 
+        target="_blank"
+        class="prev-blog-link">previous blog</a>, 
+ I shared how I built an LLM serving system that could stream model responses in real time. As I started to test the system further, a few limitations began to emerge:</p>
+        <ul>
+                <li>The GPU utilization was not optimal even when I was overloading a replica with requests, which meant GPU is not being utilized to its full potential.</li>
+                <li>Latency started to creep up during load on the client side but a similar behavior was not seen on the vLLM side.</li>
+                <li>Starting more than 3 replicas caused an increase in end to end latency.</li>
+            </ul>
+        <p>The initial version, built entirely in Python, ultimately ran into the inherent limitations of Python's Global Interpreter Lock (GIL) and event loop contention, which bottlenecked performance under heavy, concurrent loads.</p>
+        <p>This sparked a change in a few components of the system. This post details the new changes in the system. This version strategically uses a hybrid C++/Python approach to combine raw performance with a rich machine learning ecosystem, tackling the previous version's shortcomings.</p>
+        <h4>The Bottleneck in Detail: A Blocked Event Loop</h4>
+        <p>So, why exactly does a single event loop cause such a problem? The issue lies in how Python's asyncio event loop handles different types of tasks based on a model of cooperative multitasking.</p>
+        <ul>
+            <li><strong>I/O bound tasks:</strong> Async excels with I/O heavy work, such as network requests. While one task waits for I/O to complete, it yields control so other tasks can run, keeping the system responsive even under heavy concurrency.</li>
+                <li><strong>CPU bound tasks:</strong> When a CPU bound task runs, the event loop’s efficiency drops sharply. A task like tokenizing a large batch of text can monopolize it, preventing other work from running. During this time, no new requests are processed, leading to significant queuing delays.
+
+
+            </li>
+        </ul>
+        <p>This queuing behavior is precisely what happened in the original system. The CPU intensive tokenization step would stall the entire process, preventing the server from handling concurrent requests efficiently and creating a pipeline bottleneck that starved the GPU of data.</p>
+        <p>The diagram below shows that the average end to end latency at the vLLM is about 20s less compared to the latency at the proxy showing significant queuing during high load. </p>
+        <figure>
+            <img src="images/old-compare.png" alt="Graph showing old and new system comparison" class="blog-image">
+            <figcaption><b>Figure 1:</b>Avg end-to-end latency(Old system)</figcaption>
+        </figure>
+
+        <h4>High Level Architecture</h4>
+        <!-- <img src="images/control-plane.png" alt="Control plane of the LLM serving system" class="blog-image"> -->
+
+        <p>The system still has the same logical planes, control and data plane. But the planes are now completetly separated and do not have any overlapping components.</p>
+        <ul>
+            <li>Control Plane: This is the system's brain. It manages deployment metadata, replica lifecycles, routing, and health monitoring.  It doesn't handle any client traffic directly. The original python implementaion is kept intact.</li>
+            <li>Data Plane: This design has changed. Now, the requests are directly routed from the HTTP proxy to the replicas bypassing the scheduler. This reduces the delay in the data path.</li>
+            </li>
+        </ul>
+        <p>This separation allows the data plane to be highly optimized for low latency processing while the control plane focuses on maintaining system stability and state.</p>
+
+
+        <figure>
+            <img src="images/overall_design.png" alt="LLM serving system" class="blog-image">
+            <figcaption>
+                <b>Figure 2:</b>LLM serving system
+            </figcaption>
+        </figure>
+        <p>We will now look at the changes in each plane.</p>
+        
+        <h3>Control Plane</h3>
+        
+        <p>Most part of the control plane is the same as the original version. The main difference is that the Scheduler does not particiapte in the data path and it only manages the lifecycle of the replicas.</p>
+       
+
+        <h3>Data Plane</h3>
+        <p>The Data Plane has significantly changed from the previous design.</p>
+        <p>HTTP Proxy</p>
+        <ul>
+            <li>In the new design, HTTP Proxy is implemented in C++, avoiding the single event loop bottleneck of Python. HTTP requests and gRPC connections run in separate async loops, which are both coroutine based, enabling non-blocking processing and smooth backpressure during token streaming.
+
+            </li>
+            
+        </ul>
+        <p>Replica Sever</p>
+        <ul>    
+            <li>In the previous design, the entire replica logic was run as a single Python process, which became a major bottleneck. In the new version, the replica server is split into two parts.</li>
+            <li>The first part of the server is implemented in C++ which runs the gRPC server and handles the token streaming.</li>
+            <li>This server embeds a Python runtime which runs the vLLM asynchronous generation.</li>
+            <li>C++ gRPC threads handle incoming requests and token streaming, while a dedicated Python thread runs the async generation loop</li>
+           
+        </ul>
+        <p>The new design offsets the major bottlenecks of the previous design and delivers a low latency system.</p>
+        <p>The deployment setup is similar to the previous version and is discussed in the <a href="https://vaishdho1.github.io/my-portfolio/llm-serving-system.html" 
+            target="_blank"
+            class="prev-blog-link">previous blog</a>.</p>
+        
+        <h4>Design Decisions</h4>
+        <p>Let’s talk about the most important architectural decisions behind the new system and more importantly, why they were made. </p>
+        <ul>
+            <li><strong>Dual Language Implementation</strong>: Performance critical networking and streaming are handled in C++, avoiding Python’s GIL and giving fine control over concurrency. Python stays where it’s strongest, running the model with vLLM and managing orchestration, so I get both speed and flexibility.
+            <li><strong>Asynchronous concurrency</strong>- C++ 23 coroutines and Boost.Asio power the proxy, while Python’s `asyncio handles orchestration and model tasks. This design supports high concurrency without blocking.</li>
+            <li><strong>Threaded Replica Server</strong>: Replica networking uses a multi threaded design, which is simpler to implement and works well for the current system. If needed in the future, it can be moved to a fully async model for greater scalability. </li>
+        </ul>
+        
+       
+        <h4>Load Testing & Evaluation</h4>
+        <p>To evaluate the new design, I used a setup similar to the previous version and ran Locust to simulate real user load against the deployed architecture.</p>
+        <p>This section presents the load test results and compares them with those from the earlier design.</p>
+        <p class="project-link2">For detailed analysis, you can refer to <a href="https://github.com/vaishdho1/Model-Serving-System/blob/main/docs/results.pdf" target="_blank">results.</a></p>
+        
+        <h3>Load Test Insights</h3>
+        <ul>
+            <li>The system was tested using Locust with up to 1,000 concurrent users, simulating realistic traffic patterns.</li>
+            <li>Each request used a medium length prompt of 300–500 tokens and requested up to 500 output tokens.</li>
+            <li>All requests were served by 4 active replicas running the TinyLlama model, deployed on separate VMs with A10G GPU and 16GB VRAM.</li>
+
+        </ul>
+        <div class="image-layout-diamond">
+
+            <figure class="grid-col-span-center">
+                <img src="images/old-locust.png" alt="Graph showing end-to-end latency" class="blog-image">
+                <figcaption><b>Figure 3:</b> Locust test results(Older version)</figcaption>
+            </figure>
+
+            <figure class="grid-col-span-center">
+                <img src="images/locust-new.png" alt="Graph showing end-to-end latency" class="blog-image">
+                <figcaption><b>Figure 4:</b> Locust test results(Newer version)</figcaption>
+            </figure>
+        </div>
+        <p>The graphs above compare Locust test results for the previous and new versions of the system.</p>
+        <ul>
+            <li> In the earlier design, the 95th percentile end-to-end latency climbed to ~80 s at peak load, whereas in the redesigned system it stays between 40–45 s, nearly halving latency and delivering a 2x–2.5x boost in responsiveness.</li>
+        </ul>
+        <p>The graphs below show the prometheus metrics for the newer version of the system.</p>
+
+        <div class="image-layout-diamond">
+        <figure class="grid-col-span-center1">
+            <img src="images/active-requests.png" alt="Graph showing active requests" class="blog-image">
+            <figcaption><b>Figure 5:</b> Active requests(Prometheus)</figcaption>
+        </figure>
+            <figure>
+                <img src="images/vllm-e2e95.png" alt="Graph showing 95 percentile of vllm end to end latency" class="blog-image">
+                <figcaption><b>Figure 6:</b> 95th percentile of vLLM end to end latency(Prometheus)</figcaption>
+            </figure>
+        
+            <figure>
+                <img src="images/vllm-gpu.png" alt="Graph showing gpu utilization" class="blog-image">
+                <figcaption><b>Figure 7:</b> GPU utilization(Prometheus)</figcaption>
+            </figure>
+        
+        </div>
+        
+       
+        
+         <ul> 
+            <li><strong>System Responsiveness: </strong> The system consistently handled around 1,000 active requests. The stable nature of the graph during sustained load indicates no significant request queueing.</li> 
+            <li><strong>Inference Latency: </strong> The 95th percentile end-to-end latency at vLLM stayed capped at 50 seconds,comparable to the Locust test (Figure&nbsp;4), effectively removing the bottleneck from the previous design.</li>
+            <li><strong>GPU Utilization: </strong> GPU usage peaked at about 60%, indicating that for the given load, the GPU was being driven close to its full potential.</li> </ul> <p>Overall, these metrics show that the new design effectively removes previous bottlenecks and delivers a more robust, scalable system.</p>
+            
+            <h4>Future Improvements</h4>
+    <p>In the next version of the system, I plan to explore:</p>
+    <ul>
+        <li><strong>Autoscaling with SLOs:</strong> Dynamically scale replicas based on response times and queue depth.</li>
+        <li><strong>Persistent Storage:</strong> Explore storage options for presistence and fault tolerance.</li>
+        </ul>
+   
+
+    <h4>Closing Thoughts</h4>
+    <p>This redesign takes the lessons from the first version and turns them into a system that is faster, more scalable, and more resilient. For me, this was more than just an optimization exercise, it was an opportunity to deepen my understanding of building high performance, distributed systems. If you’re working on similar challenges, I’d love to hear about your approach.</p>
+    <p class="project-link2">For deeper technical details, you can refer to the <a href="https://github.com/vaishdho1/Model-Serving-System/blob/main/docs/design_document.pdf" target="_blank">design document.</a></p>
+    
+        <p class="project-link">
+            You can find the full project here: 
+            <a href="https://github.com/vaishdho1/Model-Serving-System" target="_blank">
+                GitHub - Model Serving System
+            </a>
+        </p>
+       </div>
+
+</body>
+</html>
+
+
+
+
