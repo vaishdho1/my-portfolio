@@ -114,11 +114,31 @@ figcaption {
 
 .grid-col-span-center {
     grid-column: 1 / -1;
-    width: 50%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 }
 
+.grid-col-span-center1 {
+    grid-column: 1 / -1;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.prev-blog-link {
+    color: #035139; /* Dark green to match your theme */
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.prev-blog-link:hover {
+    color: #049a6c; /* Lighter green on hover */
+    background-color: rgba(3, 81, 57, 0.1); /* Subtle highlight */
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 2px 4px; /* Slight padding so highlight looks better */
+}
 
 /* --- Author Links (GitHub, LinkedIn, etc.) --- */
 /* In blog-style.css */
@@ -290,6 +310,20 @@ figcaption {
 }
 
 
+
+.project-link2 a {
+    color: #035139; /* Your dark green theme color */
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.project-link2 a:hover {
+    text-decoration: none; /* Removes underline on hover */
+    color: #049a6c; /* Optional: lighter green on hover */
+}
+
+
 /* In blog-style.css */
 
 /* --- Top Corner Links --- */
@@ -454,4 +488,5 @@ figcaption {
     .grid-col-span-center {
         width: 80%;
     }
+    
 }
