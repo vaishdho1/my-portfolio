@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LLM Serving System</title>
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    
+        <link rel="stylesheet" href="blog-style.css">
+    </head>
+<body>
+
+    <div class="blog-container">
+        
+        <h1>Raft Consensus Protocol</h1>
+        
+        <div class="blog-meta">
+            <span class="blog-tag">System Design</span>
+            <span class="blog-tag">Infrastructure</span>
+        </div>
+
+        <p class="blog-date">January 26, 2026</p>
+        <div class="email-link">
+            <a href="mailto:vpanchavati10@gmail.com" title="Email">
+                vpanchavati10@gmail.com
+            </a>
+           
+        </div>
+        <div class="header-links">
+           
+            <a href="https://github.com/vaishdho1/Raft-project" target="_blank" title="Project Repository">
+                <i class="devicon-github-original"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/vaishnavi-panchavati/" target="_blank" title="LinkedIn">
+                <i class="devicon-linkedin-plain"></i>
+            </a>
+        </div>
+        
+
+        <p>
+            I’ve always been fascinated by how distributed systems maintain a single consistent truth despite crashes, network partitions, and message loss. That curiosity led me to distributed consensus protocols and a desire to understand both their theory and implementation.
+          </p>
+          <p>
+            To understand it in practice, I took on a self driven project to build the Raft consensus protocol in Go, implementing core features like elections, replication, persistence, and snapshotting, and used it to power a strongly consistent replicated KV store. I also designed an observability pipeline to monitor the system.
+          </p>
+          <p>
+            This blog walks through the system’s architecture,the design decisions behind it and challenges it exposed.
+          </p>
+          
+        <h4>Introduction</h4>
+        <p>Before diving into what I built, we first need to look at the problem Raft solves.</p>
+        <p>In a distributed environment where nodes can fail or disconnect at any time, agreeing on the state of the system is notoriously difficult. Raft cuts through this complexity by enforcing a single consensus timeline. Raft aligns the cluster around a shared log. As long as a majority of the nodes are healthy, the system remains available and consistent.</p>
+        <p>The protocol relies on these invariants:</p>
+        <ul>
+            <li><strong>Single Leader:</strong> Decisions are centralized and only one node orders events to prevent conflicts.</li>
+            <li><strong>Replicated Log:</strong> The log serves as the single source of truth for the sequence of events.</li>
+            <li><strong>Majority Commit:</strong> Safety is guaranteed by quorum, data isn't trusted until a majority acknowledges it.</li>
+            <li><strong>Deterministic Execution:</strong> Once a log entry is committed, the system guarantees that every node will apply that entry to its state machine in the exact same order.</li>
+        </ul>
+      
+        <h4>System Overview</h4>
+        <!-- <img src="images/control-plane.png" alt="Control plane of the LLM serving system" class="blog-image"> -->
+
+        <p>
+            The system is a <b>replicated state machine</b> built on a leader based, event driven consensus core.
+            The cluster runs with an <b>odd number of nodes</b> to ensure a clear majority quorum for committing entries. Each node hosts the same two components —
+            <b>Raft</b> and a <b>KV server</b> — and nodes communicate internally over RPC.
+          </p>
+          
+          <p>The system runs as a cluster of multiple nodes where:</p>
+          <ul>
+            <li>Every node hosts a <b>Raft peer</b> and a <b>KV server</b>.</li>
+            <li>At any moment, only one node acts as the <b>Leader</b> which sends periodic heartbeats to the followers.</li>
+            <li>The remaining nodes act as <b>Followers</b> and replicate the leader’s log.</li>
+          </ul>
+          <p>
+            We’ll now break these down across two planes that make the system easier to reason about.
+          </p>
+          
+            
+          <h4>Architecture Overview</h4>
+          <figure class="featured-image">
+            <img src="images/raft.png" alt="Raft consensus system" class="blog-image">
+            <figcaption>
+                <b>Figure 1:</b> Raft Consensus System
+            </figcaption>
+        </figure>
+
+          <p>
+            With the system’s components introduced, the next step is to see how they interact end-to-end.
+            To simplify the mental model, I organize the architecture into two complementary planes:
+          </p>
+          
+          <ul>
+            <li><b>Consensus Plane</b> — This is where the core RAFT protocol runs.</li>
+            <li><b>Application Plane</b> - This is where the clients interact with the system</li>
+          </ul>
+          
+          <h4>Consensus Plane (Raft)</h4>
+          <p>
+            The consensus plane is the reliability layer. It stores a
+            <b>replicated log of operations</b> and guarantees that all nodes agree on the same committed order.
+          </p>
+          
+          <ul>
+            <li>
+              <b>Leader election</b>: All nodes start as followers. If a follower doesn’t receive a heartbeat within an election timeout,
+              it becomes a candidate, increments its term, and requests votes. A node becomes leader once it wins a majority.
+              Leaders send periodic heartbeats to maintain authority.
+            </li>
+            <li>
+              <b>Replication</b>: Clients (through the KV layer) submit commands to the leader. The leader appends the command to its log
+              and simultaneously persists and replicates it to followers. Followers accept or reject the entries depending on the current state of their own logs.
+            </li>
+            <li>
+              <b>Commitment via quorum</b>: An entry becomes committed only after it is stored on a majority of nodes.
+              This means, even if a leader crashes, any new leader elected by a majority will contain all committed entries.
+            </li>
+            <li>
+              <b>Apply stream</b>: Once entries are committed, Raft delivers them in order to the application layer.
+            </li>
+            <li>
+              <b>Durability</b>: Raft persists its state and on recovery after a crash, it safely rejoins the cluster.
+            </li>
+            <li>
+              <b>Snapshots and log compaction</b>: To prevent unbounded log growth, Raft compacts old committed entries into snapshots. Each node separately snapshots its own state.
+            </li>
+          </ul>
+          
+          <h4>Application Plane (KV Store)</h4>
+          <p>
+            The application plane turns Raft’s committed log into a usable service. The KV store is implemented as a
+            deterministic state machine that ensures given the same sequence of committed commands, every replica reaches the same state.
+            The following are the key responsibilities of the application plane:
+          </p>
+          
+          <ul>
+            <li>
+              <b>Client request handling</b>: Clients send GET/PUT requests to the KV layer which runs on the leader. This server packages the request into a command and send it to Raft.
+              The KV layer then waits until the command appears on the apply stream as committed. It then applies these changes to the in memory map and replies to the client. This is what enforces
+              <b>strong consistency</b>.
+            </li>
+            <li>
+              <b>Snapshots from the KV layer</b>: As state grows, the KV server periodically creates a snapshot of its current state and
+              hands it to Raft. Raft persists it and uses it to discard old log entries safely.
+            </li>
+          </ul>
+          
+          <h4>Request Flow</h4>
+          <ol>
+            <li>Client sends a KV operation to a server.</li>
+            <li>If the server is leader, it proposes the operation to Raft and appends it to the log.</li>
+            <li>Leader replicates the log entry to followers via <code>AppendEntries</code>.</li>
+            <li>Once a majority acknowledges, Raft marks the entry committed.</li>
+            <li>Committed entries are emitted on the <code>ApplyMsg</code> channel and applied by the KV state machine.</li>
+            <li>The KV server responds to the client after modifying the in memory map.</li>
+          </ol>
+          <h4>Design Decisions</h4>
+        <p>Let’s talk about a few of the core architectural choices behind this system and more importantly, why they were made. Each one was driven by practical needs uncovered during implementation. </p>
+        <ul>
+            <li>Per peer Replicator: I initially spawned separate goroutines to send every new entry to the followers but that inflated tail latency since many go routines were blocked on I/O doing redundant work. I then switched to per peer replicators with at most one in flight RPC per follower, reducing redundant work and goroutine churn.</li>
+            <li><strong>Latency aware replication </strong>: I chose to parallely send Append RPCs to the followers and simultaneously persists its log locally, reducing commit latency by overlapping disk and network work.</li>
+            <li><strong>Asynchronous snapshotting </strong>: I chose independent persistence for Raft state and snapshots to avoid blocking replication. </strong></li>
+            <li><strong>Disk Persistence:</strong> Each disk write first creates a temporary file and then renames the file atomically. This prevents corruption of data during crashes.</li>
+            <li><strong>Append RPC retires</strong>: I chose the optimization of sending only one RPC per term when the follower rejects an RPC due to conflict in its log. This reduces the number of RPCs.</li>
+            <li><strong>OCC backed KV store</strong>: I built the KV store with optimistic concurrency control using versions. This allows the user to read the most recent write providing linearizable behavior. </li>
+            </li>
+        </ul>
+        <h4>Observability</h4>
+        <p>The system integrates observability through a pluggable MetricsSink interface that the Raft core calls at key lifecycle points.
+            This keeps the consensus logic clean while making it easy to export metrics to any backend. A few metrics that are instrumented:</p>
+        <ul>
+            <li><b>Health and latency</b>: Per RPC success or failure rates and request duration, including server side latency.</li>
+            <li><b>Leader health and stability</b>: Tracks term and role transitions, along with election start to finish durations.</li>
+            <li><b>Replication and log growth</b>: Observes per follower replication lag and log length</li>
+            <li><b>Persistence and snapshots</b>: Records Snapshot duration and size, Raft state size, and disk write counts.</li>
+        </ul>
+        <h4>Load Testing & Evaluation</h4>
+        <p>The benchmarking of the system was done on a single server. I started each node as a separate process which communicates with Go rpc.</p>
+        <p>This section focuses on a few tests cases to illustrate the system's behavior under load.</p>
+        
+        <h3>Baseline tests</h3>
+        <p>clients=20 snapshot_size=4MB read_ratio=0.0</p>
+        <p>clients=56 snapshot_size=4MB read_ratio=0.0</p>
+        <ul>
+            <li>The systems was first tested by starting 3 servers in the normal mode without any crashes to measure the maximum latency and number of operations it can handle with snapshotting size of 4MB.</li>
+            <li>The workload consists primarily of PUT operations, but because the KV store uses optimistic concurrency control (OCC), version conflicts trigger an additional GET to fetch the latest version before retrying the update.</li>
+        </ul>
+        <div class="image-layout-diamond">
+            <div class="image-stack">
+                <figure>
+                    <img src="images/20_4mb.png" alt="Graph showing number of operations" class="blog-image">
+                    <figcaption><b>Figure 2:</b>Number of client operations and latency with 20 clients</figcaption>
+                </figure>
+                <figure>
+                    <img src="images/20_persistence.png" alt="Graph showing number of operations" class="blog-image">
+                    <figcaption><b>Figure 3:</b>Persistence latency with 20 clients</figcaption>
+                </figure>
+            </div>
+
+            <div class="image-stack">
+                <figure>
+                    <img src="images/64_4mb.png" alt="Graph showing number of operations" class="blog-image">
+                    <figcaption><b>Figure 4:</b> Number of client operations and latency with 64 clients</figcaption>
+                </figure>
+                <figure>
+                    <img src="images/64_persistence.png" alt="Graph showing number of operations" class="blog-image">
+                    <figcaption><b>Figure 5:</b> Persitence latency with 64 clients</figcaption>
+                </figure>
+            </div>
+        </div>
+        
+     
+        <ul>
+            <li>The system exhibits almost similar latency for both 20clients and 64 clients. This confirms that the bottleneck is Disk latency, not CPU. The Raft leader effectively batches multiple client requests into single disk syncs, allowing throughput to rise linearly while per-request latency remains anchored to the hardware's fsync speed.
+    <h3>Crash tests</h3>
+    <p>-clients 20 -snapshot_size 1MB -crash_every 40s -restart_every 40s</p>    
+    <div class="image-layout-diamond">
+        <figure>
+            <img src="images/restart_same_point.png" alt="Graph showing number of operations" class="blog-image">
+            <figcaption><b>Figure 6:</b>Start Index</figcaption>
+        </figure>
+
+        <figure>
+            <img src="images/restart_same_point_1.png" alt="Graph showing number of operations" class="blog-image">
+            <figcaption><b>Figure 7:</b>Role of each node</figcaption>
+        </figure>
+
+        <figure class="grid-col-span-center">
+            <img src="images/restart_same_point_2.png" alt="Graph showing number of operations" class="blog-image">
+            <figcaption><b>Figure 8:</b>Snapshot size</figcaption>
+        </figure>
+    </div>
+    <li>The graphs say show that when one node crashes and restarts it picks from where it left. This is shown by the startIndex being constant at 50000 for node 0 and then picks from there when it restarts. </li>
+    <h4>Bottlenecks</h4>
+    <p>As the system evolves, there are a few key areas I’d like to build which include:</p>
+    <ul>
+        <li><strong>ReadIndex optimization</strong>: Reads currently go through the commit path even in cases where they could be served safely without adding log entries.</li>
+        <li><strong>Coarse grained disk persistence</strong>: Persistence currently writes the full Raft state and snapshot, which increases I/O cost and can slow down the write path.</li>
+        <li><strong>Leader centric request handling</strong>: Followers are primarily used for replication and client traffic is effectively handled by the leader, leaving follower capacity underutilized.</li>
+        <li><strong>Single machine test environment</strong>: Running all nodes on the same host serializes disk I/O across replicas, likely overstating latency compared to a true multi-machine setup.</li>
+    </ul> 
+
+    <h4>Closing Thoughts</h4>
+    <p>
+        This project was my first deep dive into Go and using it to build a distributed consensus protocol.
+        It helped me develop a much stronger intuition for what it takes to design a reliable system, one that
+        continues to make progress under failures while still preserving correctness.
+        The most interesting challenges were in handling failures, persistence,
+        and timing without compromising safety or liveness.
+      </p>
+      <p>
+        If you’re building in this space, I’d love to connect. I’m always open to exchanging ideas,
+        discussing alternative designs, or exploring potential collaborations.
+      </p><p class="project-link">
+            You can find the full project here: 
+            <a href="https://github.com/vaishdho1/Raft-project" target="_blank">
+                GitHub - Raft Project
+            </a>
+        </p>
+       </div>
+
+</body>
+</html>
+
+
+
+

@@ -112,6 +112,12 @@ figcaption {
     margin: 2rem 0;
 }
 
+.image-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 .grid-col-span-center {
     grid-column: 1 / -1;
     width: 60%;
