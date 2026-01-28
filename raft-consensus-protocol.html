@@ -184,8 +184,8 @@
         <p>This section focuses on a few tests cases to illustrate the system's behavior under load.</p>
         
         <h3>Baseline tests</h3>
-        <p>clients=20 snapshot_size=4MB read_ratio=0.0</p>
-        <p>clients=56 snapshot_size=4MB read_ratio=0.0</p>
+        <p>- clients=20 snapshot_size=4MB read_ratio=0.0</p>
+        <p>- clients=56 snapshot_size=4MB read_ratio=0.0</p>
         <ul>
             <li>The systems was first tested by starting 3 servers in the normal mode without any crashes to measure the maximum latency and number of operations it can handle with snapshotting size of 4MB.</li>
             <li>The workload consists primarily of PUT operations, but because the KV store uses optimistic concurrency control (OCC), version conflicts trigger an additional GET to fetch the latest version before retrying the update.</li>
@@ -218,7 +218,7 @@
         <ul>
             <li>The system exhibits almost similar latency for both 20 clients and 64 clients. This confirms that the bottleneck is disk latency, not CPU. The Raft leader effectively batches multiple client requests into single disk syncs, allowing throughput to rise linearly while per-request latency remains anchored to the hardware's fsync speed.
     <h3>Crash tests</h3>
-    <p>-clients 20 -snapshot_size 1MB -crash_every 40s -restart_every 40s</p>    
+    <p>- clients 20 -snapshot_size 1MB -crash_every 40s -restart_every 40s</p>    
     <div class="image-layout-diamond">
         <figure>
             <img src="images/restart_same_point.png" alt="Graph showing number of operations" class="blog-image">
