@@ -216,7 +216,7 @@
         
      
         <ul>
-            <li>The system exhibits almost similar latency for both 20clients and 64 clients. This confirms that the bottleneck is Disk latency, not CPU. The Raft leader effectively batches multiple client requests into single disk syncs, allowing throughput to rise linearly while per-request latency remains anchored to the hardware's fsync speed.
+            <li>The system exhibits almost similar latency for both 20 clients and 64 clients. This confirms that the bottleneck is disk latency, not CPU. The Raft leader effectively batches multiple client requests into single disk syncs, allowing throughput to rise linearly while per-request latency remains anchored to the hardware's fsync speed.
     <h3>Crash tests</h3>
     <p>-clients 20 -snapshot_size 1MB -crash_every 40s -restart_every 40s</p>    
     <div class="image-layout-diamond">
@@ -235,7 +235,7 @@
             <figcaption><b>Figure 8:</b>Snapshot size</figcaption>
         </figure>
     </div>
-    <li>The graphs say show that when one node crashes and restarts it picks from where it left. This is shown by the startIndex being constant at 50000 for node 0 and then picks from there when it restarts. </li>
+    <li>The graphs indicate that a crashed node correctly resumes from its prior state after restart, as shown by the startIndex staying at 50,000 for node 0 and continuing from there. </li>
     <h4>Bottlenecks</h4>
     <p>As the system evolves, there are a few key areas I’d like to build which include:</p>
     <ul>
