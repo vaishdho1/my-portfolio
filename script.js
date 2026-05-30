@@ -5,6 +5,23 @@ document.addEventListener('DOMContentLoaded', function () {
     menuToggle.addEventListener('click', function () {
       container.classList.toggle('expanded');
     });
+
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      const sections = document.querySelectorAll('main > div');
+      const target = document.getElementById(hash);
+      if (target) {
+        sections.forEach(s => { s.style.display = 'none'; s.classList.remove('fade-in'); });
+        target.style.display = 'block';
+        void target.offsetWidth;
+        target.classList.add('fade-in');
+
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + hash);
+        });
+      }
+    }
   });
   const navLinks = document.querySelectorAll('.nav-links a');
   navLinks.forEach(link => {
