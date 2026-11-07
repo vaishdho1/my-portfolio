@@ -77,11 +77,29 @@ nav {
     font-size: 18px;
 }
 
+.back-home {
+    display: inline-flex;
+    align-items: center;
+    margin: 0.25rem 0 0.5rem;
+    padding: 0.55rem 1.2rem;
+    background-color: #035139;
+    color: aliceblue;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.back-home:hover,
+.back-home:focus-visible {
+    background-color: #044531;
+    color: #ffffff;
+}
+
 
 .home-container{
     /*height: 60vh;*/
-    display: flex;
-    align-items: center;
+    display: block;
     /*justify-content: center;*/
     /* width: 100%; */
     /* height: calc(100vh - 60px); */
@@ -89,13 +107,79 @@ nav {
     /* background: linear-gradient(to right, #ff7e5f, #feb47b);*/
 }
 
+.home-hero {
+    position: relative;
+}
+
 .home-child{
     border: 1px solid;
     border-radius: 30px;
-    padding: 160px 160px;
+    padding: 4.5rem 3.5rem 7rem;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), 
     -10px -10px 20px rgba(255, 255, 255, 0.5);
     background-color: #035139;
+}
+
+.home-intro + .home-intro {
+    margin-top: 0.85rem;
+}
+
+.home-intro {
+    color: aliceblue;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 52rem;
+    margin: 1.5rem 0 0;
+    opacity: 0;
+    animation: fadeSlideIn 1.2s forwards ease;
+    animation-delay: 0.45s;
+}
+
+.home-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 2.5rem auto 3rem;
+    padding: 0 1.25rem 2rem;
+}
+
+.home-block {
+    display: block;
+    text-decoration: none;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 1.5rem 1.35rem;
+    border: 1px solid rgba(3, 81, 57, 0.15);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.12),
+                -6px -6px 16px rgba(255, 255, 255, 0.45);
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.home-block h3 {
+    margin: 0;
+    font-size: 1.35rem;
+    color: #035139;
+}
+
+.home-block p {
+    margin: 0;
+    color: #165707;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.home-block:hover,
+.home-block:focus-visible {
+    transform: translateY(-4px);
+    background: #035139;
+}
+
+.home-block:hover h3,
+.home-block:hover p,
+.home-block:focus-visible h3,
+.home-block:focus-visible p {
+    color: aliceblue;
 }
 .wave {
     position: absolute;
@@ -575,7 +659,7 @@ footer {
 
   }
 
-  #home, #about-me, #experience, #projects, #contact {
+  #home, #education, #experience, #projects, #contact {
     scroll-margin-top: 80px; /* Adjust this value based on your header height */
   }
   
@@ -742,6 +826,9 @@ footer {
     font-size: 1rem;  /* smaller or bigger than heading as you prefer */
     color: #b7ff8b;
     font-weight: bold;
+    text-align: right;
+    line-height: 1.35;
+    max-width: 46%;
   }
   .combined-link {
     display: inline-flex;
@@ -1116,7 +1203,11 @@ text-align: center; /* Add this line to center the text */
   /* --- Home Section --- */
   .home-child {
       /* Reduce padding to fit smaller screens */
-      padding: 60px 30px;
+      padding: 60px 30px 100px;
+  }
+
+  .home-blocks {
+      grid-template-columns: 1fr;
   }
 
   .hello-typewriter {

@@ -1,55 +1,36 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const container = document.querySelector('.header-bar');
-  
-    menuToggle.addEventListener('click', function () {
-      container.classList.toggle('expanded');
-    });
-
-    const hash = window.location.hash.substring(1);
-    if (hash) {
-      const sections = document.querySelectorAll('main > div');
-      const target = document.getElementById(hash);
-      if (target) {
-        sections.forEach(s => { s.style.display = 'none'; s.classList.remove('fade-in'); });
-        target.style.display = 'block';
-        void target.offsetWidth;
-        target.classList.add('fade-in');
-
-        const navLinks = document.querySelectorAll('.nav-links a');
-        navLinks.forEach(l => {
-          l.classList.toggle('active', l.getAttribute('href') === '#' + hash);
-        });
-      }
-    }
+function showSection(targetId) {
+  const sections = document.querySelectorAll('main > div');
+  sections.forEach(section => {
+    section.style.display = 'none';
+    section.classList.remove('fade-in');
   });
-  const navLinks = document.querySelectorAll('.nav-links a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      // Remove "active" class from all links and add it to the clicked link
-      navLinks.forEach(nav => nav.classList.remove('active'));
-      this.classList.add('active');
 
-      // Hide all sections inside <main>
-      const sections = document.querySelectorAll('main > div');
-      sections.forEach(section => {
-        section.style.display = 'none';
-        section.classList.remove('fade-in'); // Remove any old fade class
+  const targetSection = document.getElementById(targetId);
+  if (!targetSection) {
+    return;
+  }
+
+  targetSection.style.display = 'block';
+  if (targetId !== 'home') {
+    void targetSection.offsetWidth;
+    targetSection.classList.add('fade-in');
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const hash = window.location.hash.substring(1);
+    if (hash && document.getElementById(hash)) {
+      showSection(hash);
+    }
+
+    document.querySelectorAll('.home-block, .back-home').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        showSection(targetId);
       });
-
-      // Display only the targeted section based on the href attribute
-      const targetId = this.getAttribute('href').substring(1); // removes the '#' character
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.style.display = 'block';
-        // Trigger reflow before adding fade-in class
-        if (targetId !== 'home') {
-            // Force reflow before adding the fade-in class to restart animation
-            void targetSection.offsetWidth;
-            targetSection.classList.add('fade-in');
-          }
-      }
     });
   });
 
@@ -129,12 +110,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-document.getElementById("resume-button").addEventListener("click", function() {
-    // URL of your resume
-    var resumeUrl = "assets/vaishnavi_resume.pdf";
-    // Open the resume in a new tab
-    window.open(resumeUrl, "_blank");
-});
 
 // window.addEventListener('scroll', function() {
 //     const header = document.querySelector('header');
