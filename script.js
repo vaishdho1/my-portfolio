@@ -1,8 +1,8 @@
 function showSection(targetId) {
-  const sections = document.querySelectorAll('main > div');
+  const sections = document.querySelectorAll('main > section');
   sections.forEach(section => {
     section.style.display = 'none';
-    section.classList.remove('fade-in');
+    section.classList.remove('enter');
   });
 
   const targetSection = document.getElementById(targetId);
@@ -11,12 +11,14 @@ function showSection(targetId) {
   }
 
   targetSection.style.display = 'block';
-  if (targetId !== 'home') {
-    void targetSection.offsetWidth;
-    targetSection.classList.add('fade-in');
-  }
+  void targetSection.offsetWidth;
+  targetSection.classList.add('enter');
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelectorAll('.nav a').forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + targetId);
+  });
+
+  window.scrollTo({ top: 0 });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
       showSection(hash);
     }
 
-    document.querySelectorAll('.home-block, .back-home').forEach(link => {
+    document.querySelectorAll('.section-link').forEach(link => {
       link.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href').substring(1);

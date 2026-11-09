@@ -1,45 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background:#101418">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LLM Serving System</title>
-    
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-        
-        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    
-        <link rel="stylesheet" href="blog-style.css">
+        <link rel="stylesheet" href="site.css?v=14">
     </head>
-<body>
-
-    <div class="blog-container">
-        <div class="blog-top-bar">
-            <a href="index.html#blogs" class="back-link">&larr; Blogs</a>
-            <div class="blog-top-icons">
-                <a href="index.html" class="back-link">Home</a>
-                <span class="top-bar-divider">|</span>
-                <a href="https://github.com/vaishdho1/Model-Serving-System" target="_blank" title="GitHub"><i class="devicon-github-original"></i></a>
-                <a href="https://www.linkedin.com/in/vaishnavi-panchavati/" target="_blank" title="LinkedIn"><i class="devicon-linkedin-plain"></i></a>
-            </div>
-        </div>
-
-        <h1>LLM Serving System:V1</h1>
-        <p class="blog-author"><a href="mailto:vpanchavati10@gmail.com">vpanchavati10@gmail.com</a></p>
-        
-        <div class="blog-meta">
-            <span class="blog-tag">LLM</span>
-            <span class="blog-tag">System Design</span>
-            <span class="blog-tag">Infrastructure</span>
-        </div>
-
-        <p class="blog-date">July 2, 2025</p>
-
-        <div class="blog-nav">
-            <a href="llm-serving-system2.html" class="blog-nav-link nav-next">Next: Scaling with C++ &rarr;</a>
-        </div>
+<body style="background:#101418;color:#d5dbe3">
+    <header class="bar">
+        <a href="index.html" class="brand">Vaishnavi Panchavati</a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="index.html#experience">Work</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#open-source">Open Source</a>
+            <a href="index.html#blogs">Blog</a>
+            <a href="index.html#education">Education</a>
+        </nav>
+    </header>
+    <main>
+    <article class="article">
+        <p class="kicker">July 2, 2025 · LLM · System design</p>
+        <h1>LLM Serving System: V1</h1>
+        <p class="links"><a href="llm-serving-system2.html?v=14">Next: Scaling with C++</a></p>
 
         
         <p>Ever wonder how language models stream responses word by word while juggling hundreds of users and still staying responsive? That question led me down the rabbit hole of real time inference infrastructure. I wanted to peel back the layers and understand what it really takes to serve large models efficiently under load, with low latency, and without crashing the system. So I started a self-driven project to build a complete LLM serving system from scratch, exploring the layers of complexity that lie between receiving a prompt and delivering a streamed response.</p>
@@ -117,7 +100,7 @@
             </figcaption>
         </figure>
         
-        <p> <p>This layer is built for concurrency, responsiveness, and throughput. It orchestrates the flow of user requests through the proxy, routes them to backend workers, and ensures the output is streamed efficiently and reliably</p>
+        <p>This layer is built for concurrency, responsiveness, and throughput. It orchestrates the flow of user requests through the proxy, routes them to backend workers, and ensures the output is streamed efficiently and reliably.</p>
         <p>The HTTP Proxy runs a stateless, async FastAPI server on the frontend to handle incoming HTTP requests from clients, and communicates with backend schedulers using an async gRPC client. It:</p>
         <ul>
             <li>Receives user prompts via POST requests</li>
@@ -132,13 +115,12 @@
             <li>Place those requests into the appropriate replica queues</li>
             <li>Forward requests asynchronously to replicas for execution</li>
         </ul>
-        <p>Replica is a subprocess responsible for running the actual inference workload. It:
+        <p>Replica is a subprocess responsible for running the actual inference workload. It:</p>
             <ul>    
             <li>Loads a specific LLM model (e.g., TinyLlama)</li>
             <li>Accepts gRPC requests from the scheduler</li>
             <li>Processes input prompts using vLLM's continuous batching engine</li>
             <li>Streams tokens back incrementally</li>
-
             </ul>
         <p>Together, these components form the backbone of a real time, distributed inference system.</p>
         <h4>Design Decisions</h4>
@@ -146,7 +128,7 @@
         <ul>
             <li><strong>gRPC</strong>- I chose gRPC because real time streaming is essential when working with token based LLM outputs. gRPC provides bi-directional streaming and Protobuf based contracts that make communication between services efficient and strongly typed. It also gave me structured APIs and easy versioning as the system evolved.</li>
             <li><strong>Async</strong>- Most operations in this system, from streaming token output to inter-service communication, are IO bound. To keep the system responsive under load, I designed it around async programming. All major components use non-blocking async def functions, enabling efficient concurrency without thread contention.</li>
-            <li><strong>Pub-Sub for Proxy Updates</strong>-Polling for routing updates adds overhead by repeatedly checking for changes that may not exist. Instead, the proxy subscribes to the Head Controller at startup, and updates are pushed only when routing configuration changes. This approach reduces load and also supports future horizontal scaling 
+            <li><strong>Pub-Sub for Proxy Updates</strong>-Polling for routing updates adds overhead by repeatedly checking for changes that may not exist. Instead, the proxy subscribes to the Head Controller at startup, and updates are pushed only when routing configuration changes. This approach reduces load and also supports future horizontal scaling.</li>
             <li><strong>Scheduler</strong>- The Scheduler serves as a key intermediary between the proxy and replicas. Rather than letting the proxy send requests directly to each replica, the scheduler centralizes replica coordination and keeps the proxy logic clean and lightweight. This also helps in isolating the Head Controller from directly interacting with the replicas.</li>
             <li><strong>Replica Isolation</strong>- Each replica runs in its own process to ensure failures are contained and don't affect other replicas. This also makes it easier to scale replicas independently.</li>
             <li><strong>vLLM integration</strong>- vLLM is a library that provides a high performance, flexible, and easy to use framework for building LLM applications. It supports continuous batching and efficient token streaming, both of which dramatically increase throughput.</li>
@@ -161,8 +143,6 @@
         
         <li><strong>Scheduler Containerization:</strong> Like the controller, the scheduler was also containerized and pushed to ECR. When a new VM is created for a scheduler, it pulls the image and runs the scheduler service inside a Docker container enabling consistent lifecycle management across all worker nodes.</li>
         <li><strong>Monitoring setup:</strong> A similar containerized setup was used for Prometheus and Grafana. Once the monitoring VM launched, it pulled the prebuilt images from ECR and ran both services. Prometheus scraped metrics from the proxy and replicas every 5 seconds, and Grafana was used to visualize them.</li>
-
-        </li>
     </ul>
         <h4>Load Testing & Evaluation</h4>
         <p>To evaluate the system’s performance under concurrent traffic, I used Locust to simulate real user load against the deployed infrastructure.</p>
@@ -200,9 +180,10 @@
         <p>Prometheus metrics were monitored alongside Locust to capture deeper infrastructure behavior:</p>
         <ul>
             <li><strong>System responsiveness -</strong> 95th percentile TTFT stayed between 3–4 seconds under normal load and rose above 10s during bursty traffic (14:05–14:10)</li>
-            <li><strong>Inference latency -</strong> 95th percentile end-to-end inference latency ranged from 20–30s in steady state and peaked at 60s, closely matching Locust's global response time trends. This correlation reinforces that the primary delay stems from model inference itself, not the serving infrastructure.
-            <li><strong>Load balancing -</strong> Load was balanced effectively, with each replica handling 100–200 concurrent requests. I observed a momentary spike on individual replicas, which is an expected artifact of the "least-loaded" routing strategy during intense request bursts. While the system self corrects in seconds, a future refinement could use a Round-robin strategy to guarantee even distribution.
-        <p>These metrics confirm that system overhead was minimal, the latency increase came from the model itself, not the control or data pipeline. Load was distributed evenly, and system responsiveness was preserved under pressure.
+            <li><strong>Inference latency -</strong> 95th percentile end-to-end inference latency ranged from 20–30s in steady state and peaked at 60s, closely matching Locust's global response time trends. This correlation reinforces that the primary delay stems from model inference itself, not the serving infrastructure.</li>
+            <li><strong>Load balancing -</strong> Load was balanced effectively, with each replica handling 100–200 concurrent requests. I observed a momentary spike on individual replicas, which is an expected artifact of the "least-loaded" routing strategy during intense request bursts. While the system self corrects in seconds, a future refinement could use a Round-robin strategy to guarantee even distribution.</li>
+        </ul>
+        <p>These metrics confirm that system overhead was minimal, the latency increase came from the model itself, not the control or data pipeline. Load was distributed evenly, and system responsiveness was preserved under pressure.</p>
         <h4>Future Improvements</h4>
     <p>As the system evolves, there are a few key areas I’d like to build which include:</p>
     <ul>
@@ -221,8 +202,8 @@
                 GitHub - Model Serving System
             </a>
         </p>
-       </div>
-
+    </article>
+    </main>
 </body>
 </html>
 

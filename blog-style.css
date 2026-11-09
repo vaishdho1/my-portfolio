@@ -620,3 +620,81 @@ figcaption {
     }
     
 }
+
+body {
+    background-color: #1c1917;
+    color: rgba(255, 255, 255, 0.78);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.blog-container {
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+.blog-author,
+.blog-author a,
+.back-link,
+.blog-nav-link,
+.prev-blog-link,
+.project-link,
+.project-text {
+    color: #fff;
+}
+
+p,
+li,
+.blog-date,
+.blog-meta {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+a,
+.blog-top-bar .back-link,
+.blog-top-icons a,
+.blog-top-bar .back-link:hover,
+.blog-top-icons a:hover,
+.blog-nav-link,
+.prev-blog-link {
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.post-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #2a3340;
+}
+
+.post-nav nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.35rem 0.9rem;
+}
+
+.post-name {
+    font-family: Georgia, "Iowan Old Style", Palatino, serif;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.post-nav nav a {
+    color: #8b97a6;
+    text-decoration: none;
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+    font-size: 0.92rem;
+}
+
+.post-nav nav a:hover,
+.post-name:hover {
+    color: #f4f7fb;
+}

@@ -1,337 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" style="background:#101418">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Vaishnavi's PortFolio</title>
-       
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-        <link rel="stylesheet " href="styles.css">
-
-        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-          
+        <title>Vaishnavi Panchavati</title>
+        <link rel="stylesheet" href="site.css?v=14">
     </head>
-    <body style="background-color: #bee9d8; display: flex; flex-direction: column; flex-grow: 1;">
-        <div style="display: flex; flex-direction: column; flex-grow: 1; height: 100%; padding-top: 1.25rem;">
-            <main>
-                <div id="home" class="container-fluid home-container" style="display: block;">
-                    <div class="home-hero">
-                        <div class="home-child">
-                            <h2 class="hello-fadein" style="color: aliceblue;">Hello World!</h2>
-                            <h1 class="hello-fadein" style="font-size: 55px; color: #99d08d;">I'm Vaishnavi</h1>
-                            <p class="hello-typewriter" style="font-size: 20px;color: aliceblue;">Master of Computer Science, University of Massachusetts Amherst</p>
-                            <p class="home-intro">I am a software engineer focused on distributed systems and infrastructure, looking for full-time roles. My recent work includes contributing to Ray Core and Ray Serve and building distributed systems projects around serving, consensus, and reliability.</p>
-                            <p class="home-intro">I hold a Master’s degree in Computer Science from UMass Amherst and previously worked at Texas Instruments and Qualcomm. I enjoy working on systems problems where performance, correctness, and scalability matter.</p>
-                        </div>
-                        <div class="wave">
-                            <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-                              <path fill="#bee9d8" fill-opacity="1"
-                                d="M0,224L30,213.3C60,203,120,181,180,149.3C240,117,300,75,360,69.3C420,64,480,96,540,138.7C600,181,660,235,720,224C780,213,840,139,900,128C960,117,1020,171,1080,197.3C1140,224,1200,224,1260,202.7C1320,181,1380,139,1410,117.3L1440,96L1440,320L0,320Z">
-                              </path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="home-blocks">
-                        <a href="#education" class="home-block">
-                            <h3>Education</h3>
-                        </a>
-                        <a href="#experience" class="home-block">
-                            <h3>Experience</h3>
-                        </a>
-                        <a href="#projects" class="home-block">
-                            <h3>Projects</h3>
-                        </a>
-                        <a href="#open-source" class="home-block">
-                            <h3>Open Source</h3>
-                        </a>
-                        <a href="#blogs" class="home-block">
-                            <h3>Blogs</h3>
-                        </a>
-                        <a href="#contact" class="home-block">
-                            <h3>Contact</h3>
-                        </a>
-                    </div>
-                </div>
-                
-                
-                <div id="education" class="container about-me" style="display: none;">
-                    <a href="#home" class="back-home">Home</a>
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <h2 style="color:#044531;margin-top:0.75rem">Education</h2>
-                      </div>
-                    <div class="education-box">
-                        <div class="education-header">
-                          <div class="education-logo">
-                            <img src="images/UMass_Seal_Medium_PMS_202.png" alt="UMASS logo">
-                          </div>
-                          <div class="education-info">
-                            <h3>University of Massachusetts Amherst</h3>
-                            <span class="exp-date">Feb 2023 - Feb 2025</span>
-                          </div>
-                         
-                          
-                        </div>
-                        <div class="education-sub-info">
-                            Master of Science in Computer Science, Focus: AI &amp; Systems - GPA: 4.0
-                        </div>
-                       
-                       
-                      </div>
-                      <div class="education-box">
-                        <div class="education-header">
-                          <div class="education-logo">
-                            <img src="images/nitk.png" alt="NITK logo">
-                          </div>
-                          <div class="education-info">
-                            <h3>National Institute of Technology Karnataka</h3>
-                            <span class="exp-date">Aug 2014 - May 2018</span>
-                          </div>
-                        </div>
-                       
-                            <div class="education-sub-info">
-                                Bachelor of Technology in Electrical and Electronics Engineering - CGPA:9.26/10
-                            </div>
-                      </div>
-                     
-                     
-                      
-                        <h2 style="color:#044531;margin-top:5rem;text-align:center;margin-bottom:2rem">Relevant Coursework</h2>
-                        <div class="coursework-box">
-                          <ul>
-                            <li>Advanced Natural Language Processing</li>
-                            <li>Distributed and Operating Systems</li>
-                            <li>Advanced Algorithms</li>
-                            <li>Neural Networks</li>
-                            <li>Machine Learning</li>
-                          </ul>
-                        </div>
-                
-                </div>
-                <div id="blogs" class="container blogs" style="display: none;">
-                  <a href="#home" class="back-home">Home</a>
-                  <div style="text-align: center; margin-bottom: 1.5rem;">
-                      <h2 style="color:#044531">Blogs</h2>
-                  </div>
-              
-                  <div class="blog-filters">
-                      <button class="active" data-filter="all">All</button>
-                      <button data-filter="llm">LLM</button>
-                      <button data-filter="system">System Design</button>
-                     
-                  </div>
-              
-                  <div class="blog-post-list">
-                      <div class="blog-post-link" data-tags="llm system">
-                          <a href="llm-serving-system.html" target="_blank">
-                              <div class="blog-meta">
-                                  <span class="blog-tag">LLM</span>
-                                  <span class="blog-tag">System Design</span>
-                              </div>
-                              <h3>LLM Serving System: V1</h3>
-                              <p class="blog-link-date">July 2, 2025</p>
-                              <p class="blog-summary">A deep dive into building a distributed LLM serving system from scratch.</p>
-                          </a>
-                      </div>
-      
-                  </div>
-                  <div class="blog-post-list">
-                    <div class="blog-post-link" data-tags="llm system">
-                        <a href="llm-serving-system2.html" target="_blank">
-                            <div class="blog-meta">
-                                <span class="blog-tag">LLM</span>
-                                <span class="blog-tag">System Design</span>
-                            </div>
-                            <h3>LLM Serving System: V2</h3>
-                            <p class="blog-link-date">September 10, 2025</p>
-                            <p class="blog-summary">A deep analysis of optimizations and improvements to the LLM serving system.</p>
-                        </a>
-                    </div>
-    
-                </div>
-                <div class="blog-post-list">
-                  <div class="blog-post-link" data-tags="raft system">
-                      <a href="raft-consensus-protocol.html" target="_blank">
-                          <div class="blog-meta">
-                            <span class="blog-tag">Distributed Systems</span>
-                              <span class="blog-tag">System Design</span>
-                          </div>
-                          <h3>Agreeing Under Chaos</h3>
-                          <p class="blog-link-date">Jan 26, 2026</p>
-                          <p class="blog-summary">Building a Raft KV store in Go</p>
-                      </a>
-                  </div>
-  
-              </div>
-              </div>
-                   
-                
-                <div id="experience" class="container experience" style="display: none;">
-                    <a href="#home" class="back-home">Home</a>
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                      <h2 style="color:#044531">Work Experience</h2>
-                    </div>
-                  
-                    <div class="experience-box">
-                      <div class="exp-header">
-                        <div class="exp-logo">
-                          <img src="images/TexasInstruments-Logo.png" alt="Texas Instruments Logo">
-                        </div>
-                        <div class="exp-info">
-                          <h3>Software Engineer, Texas Instruments</h3>
-                          <span class="exp-date">Aug 2019 - May 2022</span>
-                        </div>
-                      </div>
-                      <div class="exp-details">
-                        <ul>
-                          <li>Implemented C++ components for a 5G transceiver calibration subsystem and built functional test infrastructure, increasing coverage by <strong style="color:#99d08d">35%</strong> and catching integration failures earlier.</li>
-                          <li>Built a Python regression framework executing <strong style="color:#99d08d">1,000+</strong> nightly tests, reducing manual effort by <strong style="color:#99d08d">40%</strong> and shortening release cycles from days to hours.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  
-                    <div class="experience-box">
-                      <div class="exp-header">
-                        <div class="exp-logo">
-                          <img src="images/Qualcomm-Emblem.png" alt="Qualcomm Logo">
-                        </div>
-                        <div class="exp-info">
-                          <h3>Software Engineer, Qualcomm</h3>
-                          <span class="exp-date">Sept 2018 - April 2019</span>
-                        </div>
-                      </div>
-                      <div class="exp-details">
-                        <ul>
-                          <li>Implemented C++ and Python components for LTE/5G physical layer software on resource-constrained systems, and debugged throughput and protocol performance issues.</li>
-                          <li>Resolved LTE/5G performance corner cases through protocol analysis and failure diagnosis, improving throughput and signal performance test outcomes by <strong style="color:#99d08d">30%</strong>.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  
-                  <div id="projects" class="container projects" style="display: none;">
-                    <a href="#home" class="back-home">Home</a>
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                      <h2 style="color:#044531">Projects</h2>
-                    </div>
-                  <div class="project-box">
-                    <div class="project-header">
-                      <div class="project-info">
-                        <div class="left-group">
-                          <a href="https://github.com/vaishdho1/Raft-project" target="_blank" class="combined-link">
-                            <h3>Raft Consensus</h3>
-                            <i class="devicon-github-original-wordmark"></i>
-                          </a>
-                        </div>
-                        <span class="project-stack">Go · Oct 2025 – Jan 2026</span>
-                      </div>
-                    </div>
-                    <div class="project-details">
-                    <ul>
-                      <li>Implemented a Raft consensus module in Go with leader election, durable persistence, replicated logs, commit tracking, snapshotting, and recovery across node failures.</li>
-                      <li>Built a strongly consistent KV store on top of Raft with safe client retries during leader changes, achieving <strong style="color:#99d08d">~1K ops/sec</strong> throughput and <strong style="color:#99d08d">~100ms</strong> p99 latency with fault injection.</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="project-box">
-                    <div class="project-header">
-                      <div class="project-info">
-                        <div class="left-group">
-                          <a href="llm-serving-system.html" target="_blank" class="combined-link">
-                            <h3>Distributed Serving System</h3>
-                          </a>
-                        </div>
-                        <span class="project-stack">C++, Python, gRPC · April 2025 – Aug 2025</span>
-                      </div>
-                    </div>
-                    <div class="project-details">
-                    <ul>
-                      <li>Designed and built a distributed serving system with control plane orchestration, replica scheduling, worker lifecycle management, and asynchronous gRPC routing.</li>
-                      <li>Moved the critical data path from Python to C++, reducing contention and improving p95 latency by <strong style="color:#99d08d">2.5×</strong>.</li>
-                      <li>Deployed and load tested the system with LLM inference workloads across AWS GPU nodes, sustaining <strong style="color:#99d08d">1,000+</strong> concurrent users at <strong style="color:#99d08d">100+</strong> requests/sec with Prometheus monitoring.</li>
-                    </ul>
-                  </div>
-                </div>
-            </div>
-
-                <div id="open-source" class="container projects" style="display: none;">
-                    <a href="#home" class="back-home">Home</a>
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                      <h2 style="color:#044531">Open Source</h2>
-                    </div>
-                    <div class="project-box">
-                      <div class="project-header">
-                        <div class="project-info">
-                          <div class="left-group">
-                            <a href="https://github.com/search?q=is%3Apr+author%3Avaishdho1+org%3Aray-project&type=pullrequests" target="_blank" class="combined-link">
-                              <h3>Ray</h3>
-                              <i class="devicon-github-original-wordmark"></i>
-                            </a>
-                          </div>
-                          <span class="project-stack">Ray Core, Ray Serve · Sept 2025 – Present</span>
-                        </div>
-                      </div>
-                      <div class="project-details">
-                        <ul>
-                          <li>Contributed <strong style="color:#99d08d">15+</strong> merged PRs to Ray’s distributed control plane, spanning autoscaling, request routing, deployment lifecycle, and controller reliability.</li>
-                          <li>Optimized fair-share scheduling in Ray’s core scheduler from O(C²) to O(C), eliminating redundant aggregate recomputation across scheduling classes.</li>
-                          <li>Fixed concurrency bugs in Ray Core, including a worker leak in the actor scheduler and a race condition in object recovery during concurrent node failures.</li>
-                          <li>Designed placement group scheduling and multi-replica fault tolerance as part of a broader gang scheduling feature, focusing on coordinated resource allocation and failure recovery.</li>
-                          <li>Built automated performance benchmarks for Ray Serve’s distributed routing path, measuring throughput, latency, and resource utilization.</li>
-                        </ul>
-                      </div>
-                    </div>
-                </div>
-                 
-                <div id="contact" class="container" style="display: none;">
-                    <a href="#home" class="back-home">Home</a>
-                    <h3 style="color:#165707; margin-top: 0.75rem;text-align:center">Let's connect!</h3>
-                    <h5 style="color:#247f0f; margin-top: 3rem;">If my work resonates with you or you have a project aligned with my interests, I’d love to explore potential collaborations. Please feel free to reach out!</h5>
-
-
-
-
-
-
+    <body style="background:#101418;color:#d5dbe3">
+        <header class="bar">
+            <a href="#home" class="brand section-link">Vaishnavi Panchavati</a>
+            <nav class="nav">
+                <a href="#experience" class="section-link">Work</a>
+                <a href="#projects" class="section-link">Projects</a>
+                <a href="#open-source" class="section-link">Open Source</a>
+                <a href="#blogs" class="section-link">Blog</a>
+                <a href="#education" class="section-link">Education</a>
+            </nav>
+        </header>
+        <main>
+            <section id="home">
+                <div class="home">
+                    <p class="kicker">Distributed systems and infrastructure</p>
+                    <h1>Vaishnavi Panchavati</h1>
+                    <p>I am a software engineer focused on distributed systems and infrastructure, looking for full-time roles. My recent work includes contributing to Ray Core and Ray Serve and building distributed systems projects around serving, consensus, and reliability.</p>
+                    <p>I hold a Master’s degree in Computer Science from UMass Amherst and previously worked at Texas Instruments and Qualcomm. I enjoy working on systems problems where performance, correctness, and scalability matter.</p>
+                    <p class="links">
+                        <a href="mailto:vpanchavati10@gmail.com">vpanchavati10@gmail.com</a>
+                        <a href="https://github.com/vaishdho1" target="_blank" rel="noopener">GitHub</a>
+                        <a href="https://www.linkedin.com/in/vaishnavi-panchavati/" target="_blank" rel="noopener">LinkedIn</a>
                     </p>
-                  
-                    <div class="contact-list">
-                      <!-- Email row -->
-                      <div class="contact-item">
-                        <img src="https://img.icons8.com/sf-black-filled/64/new-post.png" alt="Email Icon" class="icon-mail" />
-                        <a href="mailto:vpanchavati10@gmail.com" target="_blank" class="contact-link">vpanchavati10@gmail.com</a>
-                      </div>
-                  
-                      <!-- LinkedIn row -->
-                      <div class="contact-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg" alt="LinkedIn Icon" class="icon" />
-                        <a href="https://www.linkedin.com/in/vaishnavi-panchavati/" target="_blank" class="contact-link">
-                          vaishnavi-panchavati
-                        </a>
-                      </div>
-                  
-                      <!-- GitHub row -->
-                      <div class="contact-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" 
-                             alt="GitHub Icon" class="icon" />
-                        <a href="https://github.com/vaishdho1" target="_blank" class="contact-link">
-                          vaishnavi-panchavati
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  
-                </div>
-            </main>
 
-        </div>
-      
-       
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" \
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script src="script.js"></script>
+                    <div class="group">
+                        <h2><a href="#projects" class="section-link">Projects</a></h2>
+                        <a class="card card-link" href="raft-consensus-protocol.html?v=14">
+                            <div class="card-top">
+                                <h3>Raft Consensus</h3>
+                                <span>Go</span>
+                            </div>
+                            <p>A Raft KV store in Go, with leader election, durable logs, and recovery across node failures.</p>
+                        </a>
+                        <a class="card card-link" href="llm-serving-system.html?v=14">
+                            <div class="card-top">
+                                <h3>Distributed Serving System</h3>
+                                <span>C++, Python, gRPC</span>
+                            </div>
+                            <p>Control plane, replica scheduling, and a C++ data path, load tested on AWS GPUs.</p>
+                        </a>
+                        <a href="#projects" class="more section-link">See more</a>
+                    </div>
+
+                    <div class="group">
+                        <h2><a href="#open-source" class="section-link">Open source</a></h2>
+                        <a class="card card-link section-link" href="#open-source">
+                            <div class="card-top">
+                                <h3>Ray</h3>
+                                <span>Ray Core, Ray Serve</span>
+                            </div>
+                            <p>15+ merged pull requests on scheduling, routing, and controller reliability.</p>
+                        </a>
+                        <a href="#open-source" class="more section-link">See more</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="education" class="sheet" style="display: none;">
+                <a href="#home" class="back section-link">← Home</a>
+                <h2>Education</h2>
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3>University of Massachusetts Amherst</h3>
+                        <span class="when">Feb 2023 – Feb 2025</span>
+                    </div>
+                    <p class="detail">Master of Science in Computer Science, Focus: AI &amp; Systems. GPA 4.0</p>
+                </article>
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3>National Institute of Technology Karnataka</h3>
+                        <span class="when">Aug 2014 – May 2018</span>
+                    </div>
+                    <p class="detail">Bachelor of Technology in Electrical and Electronics Engineering. CGPA 9.26/10</p>
+                </article>
+                <h2 style="margin-top: 2.25rem;">Relevant coursework</h2>
+                <ul class="coursework">
+                    <li>Advanced Natural Language Processing</li>
+                    <li>Distributed and Operating Systems</li>
+                    <li>Advanced Algorithms</li>
+                    <li>Neural Networks</li>
+                    <li>Machine Learning</li>
+                </ul>
+            </section>
+
+            <section id="experience" class="sheet" style="display: none;">
+                <a href="#home" class="back section-link">← Home</a>
+                <h2>Work</h2>
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3>Texas Instruments</h3>
+                        <span class="when">Aug 2019 – May 2022</span>
+                    </div>
+                    <p class="detail">Software Engineer</p>
+                    <ul>
+                        <li>Implemented C++ components for a 5G transceiver calibration subsystem and built functional test infrastructure, increasing coverage by 35% and catching integration failures earlier.</li>
+                        <li>Built a Python regression framework executing 1,000+ nightly tests, reducing manual effort by 40% and shortening release cycles from days to hours.</li>
+                    </ul>
+                </article>
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3>Qualcomm</h3>
+                        <span class="when">Sept 2018 – April 2019</span>
+                    </div>
+                    <p class="detail">Software Engineer</p>
+                    <ul>
+                        <li>Implemented C++ and Python components for LTE/5G physical layer software on resource-constrained systems, and debugged throughput and protocol performance issues.</li>
+                        <li>Resolved LTE/5G performance corner cases through protocol analysis and failure diagnosis, improving throughput and signal performance test outcomes by 30%.</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="projects" class="sheet" style="display: none;">
+                <a href="#home" class="back section-link">← Home</a>
+                <h2>Projects</h2>
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3><a href="raft-consensus-protocol.html?v=14">Raft Consensus</a></h3>
+                        <span class="when">Oct 2025 – Jan 2026</span>
+                    </div>
+                    <p class="detail">Go · <a href="https://github.com/vaishdho1/Raft-project" target="_blank" rel="noopener">GitHub</a></p>
+                    <ul>
+                        <li>Implemented a Raft consensus module in Go with leader election, durable persistence, replicated logs, commit tracking, snapshotting, and recovery across node failures.</li>
+                        <li>Built a strongly consistent KV store on top of Raft with safe client retries during leader changes, achieving ~1K ops/sec throughput and ~100ms p99 latency with fault injection.</li>
+                    </ul>
+                </article>
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3><a href="llm-serving-system.html?v=14">Distributed Serving System</a></h3>
+                        <span class="when">April 2025 – Aug 2025</span>
+                    </div>
+                    <p class="detail">C++, Python, gRPC</p>
+                    <ul>
+                        <li>Designed and built a distributed serving system with control plane orchestration, replica scheduling, worker lifecycle management, and asynchronous gRPC routing.</li>
+                        <li>Moved the critical data path from Python to C++, reducing contention and improving p95 latency by 2.5×.</li>
+                        <li>Deployed and load tested the system with LLM inference workloads across AWS GPU nodes, sustaining 1,000+ concurrent users at 100+ requests/sec with Prometheus monitoring.</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="open-source" class="sheet" style="display: none;">
+                <a href="#home" class="back section-link">← Home</a>
+                <h2>Open Source</h2>
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3><a href="https://github.com/search?q=is%3Apr+author%3Avaishdho1+org%3Aray-project&amp;type=pullrequests" target="_blank" rel="noopener">Ray</a></h3>
+                        <span class="when">Sept 2025 – Present</span>
+                    </div>
+                    <p class="detail">Ray Core, Ray Serve</p>
+                    <ul>
+                        <li>Contributed 15+ merged PRs to Ray’s distributed control plane, spanning autoscaling, request routing, deployment lifecycle, and controller reliability.</li>
+                        <li>Optimized fair-share scheduling in Ray’s core scheduler from O(C²) to O(C), eliminating redundant aggregate recomputation across scheduling classes.</li>
+                        <li>Fixed concurrency bugs in Ray Core, including a worker leak in the actor scheduler and a race condition in object recovery during concurrent node failures.</li>
+                        <li>Designed placement group scheduling and multi-replica fault tolerance as part of a broader gang scheduling feature, focusing on coordinated resource allocation and failure recovery.</li>
+                        <li>Built automated performance benchmarks for Ray Serve’s distributed routing path, measuring throughput, latency, and resource utilization.</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="blogs" class="sheet" style="display: none;">
+                <a href="#home" class="back section-link">← Home</a>
+                <h2>Blog</h2>
+                <div class="filters blog-filters">
+                    <button class="active" data-filter="all">All</button>
+                    <button data-filter="llm">LLM</button>
+                    <button data-filter="system">System Design</button>
+                </div>
+                <article class="post blog-post-link" data-tags="llm system">
+                    <a href="llm-serving-system.html?v=14">
+                        <p class="meta">LLM · System Design · July 2, 2025</p>
+                        <h3>LLM Serving System: V1</h3>
+                        <p class="summary">A deep dive into building a distributed LLM serving system from scratch.</p>
+                    </a>
+                </article>
+                <article class="post blog-post-link" data-tags="llm system">
+                    <a href="llm-serving-system2.html?v=14">
+                        <p class="meta">LLM · System Design · September 10, 2025</p>
+                        <h3>LLM Serving System: V2</h3>
+                        <p class="summary">A deep analysis of optimizations and improvements to the LLM serving system.</p>
+                    </a>
+                </article>
+                <article class="post blog-post-link" data-tags="raft system">
+                    <a href="raft-consensus-protocol.html?v=14">
+                        <p class="meta">Distributed Systems · System Design · Jan 26, 2026</p>
+                        <h3>Agreeing Under Chaos</h3>
+                        <p class="summary">Building a Raft KV store in Go.</p>
+                    </a>
+                </article>
+            </section>
+        </main>
+        <script src="script.js?v=11"></script>
     </body>
 </html>

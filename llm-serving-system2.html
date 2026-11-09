@@ -1,50 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background:#101418">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Distributed Serving System</title>
-    
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-        
-        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    
-        <link rel="stylesheet" href="blog-style.css">
+        <title>LLM Serving System: V2</title>
+        <link rel="stylesheet" href="site.css?v=14">
     </head>
-<body>
-
-    <div class="blog-container">
-        <div class="blog-top-bar">
-            <a href="index.html#blogs" class="back-link">&larr; Blogs</a>
-            <div class="blog-top-icons">
-                <a href="index.html" class="back-link">Home</a>
-                <span class="top-bar-divider">|</span>
-                <a href="https://github.com/vaishdho1/Model-Serving-System" target="_blank" title="GitHub"><i class="devicon-github-original"></i></a>
-                <a href="https://www.linkedin.com/in/vaishnavi-panchavati/" target="_blank" title="LinkedIn"><i class="devicon-linkedin-plain"></i></a>
-            </div>
-        </div>
-
+<body style="background:#101418;color:#d5dbe3">
+    <header class="bar">
+        <a href="index.html" class="brand">Vaishnavi Panchavati</a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="index.html#experience">Work</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#open-source">Open Source</a>
+            <a href="index.html#blogs">Blog</a>
+            <a href="index.html#education">Education</a>
+        </nav>
+    </header>
+    <main>
+    <article class="article">
+        <p class="kicker">September 10, 2025 · LLM · System design</p>
         <h1>LLM Serving System: V2</h1>
-        <p class="blog-author"><a href="mailto:vpanchavati10@gmail.com">vpanchavati10@gmail.com</a></p>
-        
-        <div class="blog-meta">
-            <span class="blog-tag">LLM</span>
-            <span class="blog-tag">System Design</span>
-            <span class="blog-tag">Infrastructure</span>
-        </div>
-
-        <p class="blog-date">September 10, 2025</p>
-
-        <div class="blog-nav">
-            <a href="llm-serving-system.html" class="blog-nav-link nav-prev">&larr; Previous: Building the Foundation</a>
-        </div>
+        <p class="links"><a href="llm-serving-system.html?v=14">Previous: Building the Foundation</a></p>
 
         
-        <p>In my <a href="https://vaishdho1.github.io/my-portfolio/llm-serving-system.html" 
-        target="_blank"
-        class="prev-blog-link">previous blog</a>, 
+        <p>In my <a href="llm-serving-system.html?v=14" class="prev-blog-link">previous blog</a>, 
  I shared how I built an LLM serving system that could stream model responses in real time. As I started to test the system further, a few limitations began to emerge:</p>
         <ul>
                 <li>The GPU utilization was not optimal even when I was overloading a replica with requests, which meant GPU is not being utilized to its full potential.</li>
@@ -112,14 +93,12 @@
            
         </ul>
         <p>The new design offsets the major bottlenecks of the previous design and delivers a low latency system.</p>
-        <p>The deployment setup is similar to the previous version and is discussed in the <a href="https://vaishdho1.github.io/my-portfolio/llm-serving-system.html" 
-            target="_blank"
-            class="prev-blog-link">previous blog</a>.</p>
+        <p>The deployment setup is similar to the previous version and is discussed in the <a href="llm-serving-system.html?v=14" class="prev-blog-link">previous blog</a>.</p>
         
         <h4>Design Decisions</h4>
         <p>Let’s talk about the most important architectural decisions behind the new system and more importantly, why they were made. </p>
         <ul>
-            <li><strong>Dual Language Implementation</strong>: Performance critical networking and streaming are handled in C++, avoiding Python’s GIL and giving fine control over concurrency. Python stays where it’s strongest, running the model with vLLM and managing orchestration, so I get both speed and flexibility.
+            <li><strong>Dual Language Implementation</strong>: Performance critical networking and streaming are handled in C++, avoiding Python’s GIL and giving fine control over concurrency. Python stays where it’s strongest, running the model with vLLM and managing orchestration, so I get both speed and flexibility.</li>
             <li><strong>Asynchronous concurrency</strong>- C++ 23 coroutines and Boost.Asio power the proxy, while Python’s `asyncio handles orchestration and model tasks. This design supports high concurrency without blocking.</li>
             <li><strong>Threaded Replica Server</strong>: Replica networking uses a multi threaded design, which is simpler to implement and works well for the current system. If needed in the future, it can be moved to a fully async model for greater scalability. </li>
         </ul>
@@ -197,8 +176,8 @@
                 GitHub - Model Serving System
             </a>
         </p>
-       </div>
-
+    </article>
+    </main>
 </body>
 </html>
 

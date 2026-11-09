@@ -1,39 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background:#101418">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LLM Serving System</title>
-    
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-        
-        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    
-        <link rel="stylesheet" href="blog-style.css">
+        <title>Agreeing Under Chaos</title>
+        <link rel="stylesheet" href="site.css?v=14">
     </head>
-<body>
-
-    <div class="blog-container">
-        <div class="blog-top-bar">
-            <a href="index.html#blogs" class="back-link">&larr; Blogs</a>
-            <div class="blog-top-icons">
-                <a href="index.html" class="back-link">Home</a>
-                <span class="top-bar-divider">|</span>
-                <a href="https://github.com/vaishdho1/Raft-project" target="_blank" title="GitHub"><i class="devicon-github-original"></i></a>
-                <a href="https://www.linkedin.com/in/vaishnavi-panchavati/" target="_blank" title="LinkedIn"><i class="devicon-linkedin-plain"></i></a>
-            </div>
-        </div>
-        
+<body style="background:#101418;color:#d5dbe3">
+    <header class="bar">
+        <a href="index.html" class="brand">Vaishnavi Panchavati</a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="index.html#experience">Work</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#open-source">Open Source</a>
+            <a href="index.html#blogs">Blog</a>
+            <a href="index.html#education">Education</a>
+        </nav>
+    </header>
+    <main>
+    <article class="article">
+        <p class="kicker">January 26, 2026 · Distributed systems</p>
         <h1>Agreeing Under Chaos</h1>
-        <p class="blog-author"><a href="mailto:vpanchavati10@gmail.com">vpanchavati10@gmail.com</a></p>
-        <div class="blog-meta">
-            <span class="blog-tag">System Design</span>
-            <span class="blog-tag">Infrastructure</span>
-        </div>
-
-        <p class="blog-date">January 26, 2026</p>
         
 
         <p>
@@ -211,7 +199,8 @@
         
      
         <ul>
-            <li>The system exhibits almost similar latency for both 20 clients and 64 clients. This confirms that the bottleneck is disk latency, not CPU. The Raft leader effectively batches multiple client requests into single disk syncs, allowing throughput to rise linearly while per-request latency remains anchored to the hardware's fsync speed.
+            <li>The system exhibits almost similar latency for both 20 clients and 64 clients. This confirms that the bottleneck is disk latency, not CPU. The Raft leader effectively batches multiple client requests into single disk syncs, allowing throughput to rise linearly while per-request latency remains anchored to the hardware's fsync speed.</li>
+        </ul>
     <h3>Crash tests</h3>
     <p>- clients 20 -snapshot_size 1MB -crash_every 40s -restart_every 40s</p>    
     <div class="image-layout-diamond">
@@ -230,7 +219,9 @@
             <figcaption><b>Figure 8:</b>Snapshot size</figcaption>
         </figure>
     </div>
-    <li>The graphs indicate that a crashed node correctly resumes from its prior state after restart, as shown by the startIndex staying at 50,000 for node 0 and continuing from there. </li>
+    <ul>
+        <li>The graphs indicate that a crashed node correctly resumes from its prior state after restart, as shown by the startIndex staying at 50,000 for node 0 and continuing from there.</li>
+    </ul>
     <h4>Bottlenecks</h4>
     <p>As the system evolves, there are a few key areas I’d like to build which include:</p>
     <ul>
@@ -257,8 +248,8 @@
                 GitHub - Raft Project
             </a>
         </p>
-       </div>
-
+    </article>
+    </main>
 </body>
 </html>
 
