@@ -1,0 +1,409 @@
+:root {
+  --bg: #101418;
+  --text: #d5dbe3;
+  --strong: #f4f7fb;
+  --muted: #8b97a6;
+  --line: #2a3340;
+  --card: #171d26;
+  --hover: #1e2632;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+}
+
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.4rem 1.25rem 0.2rem;
+}
+
+.brand {
+  color: var(--strong);
+  font-family: Georgia, "Iowan Old Style", Palatino, serif;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem 0.9rem;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--strong);
+}
+
+.home,
+.sheet,
+.article {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.4rem 1.25rem 4.5rem;
+}
+
+.article h1 {
+  font-size: 2.15rem;
+}
+
+.article h3,
+.article h4 {
+  margin: 2rem 0 0.55rem;
+  color: var(--strong);
+  font-family: Georgia, "Iowan Old Style", Palatino, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.article p,
+.article li {
+  color: var(--text);
+}
+
+.article img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1rem 0 0.4rem;
+  border-radius: 10px;
+}
+
+.article figcaption {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.article .image-layout-diamond,
+.article .image-stack {
+  display: grid;
+  gap: 0.4rem;
+  margin: 1rem 0 1.4rem;
+}
+
+.article strong {
+  color: var(--strong);
+  font-weight: 650;
+}
+
+.kicker {
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+h1 {
+  margin: 0 0 1.1rem;
+  color: var(--strong);
+  font-family: Georgia, "Iowan Old Style", Palatino, serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.home > p {
+  margin: 0 0 1rem;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.15rem;
+  margin-top: 0.4rem;
+}
+
+.links a {
+  color: var(--strong);
+  text-underline-offset: 0.18em;
+}
+
+.group {
+  margin-top: 2.4rem;
+}
+
+.group h2 {
+  margin: 0 0 0.75rem;
+  font-family: Georgia, "Iowan Old Style", Palatino, serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.group h2 a {
+  color: var(--strong);
+  text-decoration: none;
+}
+
+.group h2 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.more {
+  display: inline-block;
+  margin-top: 0.35rem;
+  color: var(--strong);
+  text-underline-offset: 0.16em;
+}
+
+.card {
+  display: block;
+  margin: 0 0 0.7rem;
+  padding: 0.9rem 1rem;
+  background: var(--card);
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.card h3 {
+  margin: 0;
+  color: var(--strong);
+  font-size: 1.02rem;
+  font-weight: 650;
+}
+
+.card span,
+.card p {
+  color: var(--muted);
+}
+
+.card span {
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+.card p {
+  margin: 0.3rem 0 0;
+}
+
+a.card-link:hover {
+  background: var(--hover);
+}
+
+.notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notes li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.notes a {
+  color: var(--strong);
+  text-underline-offset: 0.16em;
+}
+
+.notes span {
+  color: var(--muted);
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--strong);
+}
+
+.sheet h2 {
+  margin: 0 0 1.15rem;
+  color: var(--strong);
+  font-family: Georgia, "Iowan Old Style", Palatino, serif;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.entry {
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.entry:last-of-type {
+  border-bottom: 1px solid var(--line);
+}
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.entry h3 {
+  margin: 0;
+  color: var(--strong);
+  font-size: 1.05rem;
+}
+
+.entry h3 a {
+  color: var(--strong);
+}
+
+.when,
+.detail {
+  color: var(--muted);
+}
+
+.when {
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.detail {
+  margin: 0.15rem 0 0;
+}
+
+.entry ul,
+.coursework {
+  margin: 0.6rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.entry li,
+.coursework li {
+  margin: 0.3rem 0;
+}
+
+.filters {
+  display: flex;
+  gap: 0.45rem;
+  margin-bottom: 0.6rem;
+}
+
+.filters button {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.22rem 0.7rem;
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.filters button.active {
+  background: var(--strong);
+  color: var(--bg);
+  border-color: var(--strong);
+}
+
+.post a {
+  display: block;
+  margin: 0 0 0.7rem;
+  padding: 0.9rem 1rem;
+  background: var(--card);
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.post a:hover {
+  background: var(--hover);
+}
+
+.post h3 {
+  margin: 0.15rem 0;
+  color: var(--strong);
+  font-size: 1.02rem;
+}
+
+.meta,
+.summary {
+  margin: 0;
+  color: var(--muted);
+}
+
+.meta {
+  font-size: 0.82rem;
+}
+
+@media (max-width: 700px) {
+  .bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .nav {
+    justify-content: flex-start;
+  }
+
+  h1 {
+    font-size: 2.05rem;
+  }
+
+  .card-top,
+  .entry-head,
+  .notes li {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+}
+
+.enter {
+  animation: rise 0.55s ease both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter {
+    animation: none;
+  }
+}
