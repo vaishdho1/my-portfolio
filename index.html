@@ -4,11 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Vaishnavi Panchavati</title>
-        <link rel="stylesheet" href="site.css?v=14">
+        <link rel="stylesheet" href="site.css?v=36">
     </head>
     <body style="background:#101418;color:#d5dbe3">
         <header class="bar">
-            <a href="#home" class="brand section-link">Vaishnavi Panchavati</a>
+            <a href="#home" class="brand corner section-link">Vaishnavi Panchavati</a>
             <nav class="nav">
                 <a href="#experience" class="section-link">Work</a>
                 <a href="#projects" class="section-link">Projects</a>
@@ -20,10 +20,9 @@
         <main>
             <section id="home">
                 <div class="home">
-                    <p class="kicker">Distributed systems and infrastructure</p>
                     <h1>Vaishnavi Panchavati</h1>
-                    <p>I am a software engineer focused on distributed systems and infrastructure, looking for full-time roles. My recent work includes contributing to Ray Core and Ray Serve and building distributed systems projects around serving, consensus, and reliability.</p>
-                    <p>I hold a Master’s degree in Computer Science from UMass Amherst and previously worked at Texas Instruments and Qualcomm. I enjoy working on systems problems where performance, correctness, and scalability matter.</p>
+                    <p>I am a software engineer focused on <span class="mark">distributed systems and infrastructure</span>, looking for full-time roles. My recent work includes contributing to <span class="mark">Ray Core and Ray Serve</span> and building distributed systems projects around serving, consensus, and reliability.</p>
+                    <p>I hold a <span class="mark">Master’s degree in Computer Science</span> from <span class="mark">University of Massachusetts at Amherst</span> and previously worked at Texas Instruments and Qualcomm. I enjoy working on systems problems where performance, correctness, and scalability matter.</p>
                     <p class="links">
                         <a href="mailto:vpanchavati10@gmail.com">vpanchavati10@gmail.com</a>
                         <a href="https://github.com/vaishdho1" target="_blank" rel="noopener">GitHub</a>
@@ -32,32 +31,32 @@
 
                     <div class="group">
                         <h2><a href="#projects" class="section-link">Projects</a></h2>
-                        <a class="card card-link" href="raft-consensus-protocol.html?v=14">
+                        <article class="card">
                             <div class="card-top">
-                                <h3>Raft Consensus</h3>
+                                <h3><a class="repo" href="https://github.com/vaishdho1/Raft-project" target="_blank" rel="noopener" aria-label="Raft Project on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a> <a href="raft-consensus-protocol.html?v=15">Raft Consensus</a></h3>
                                 <span>Go</span>
                             </div>
-                            <p>A Raft KV store in Go, with leader election, durable logs, and recovery across node failures.</p>
-                        </a>
-                        <a class="card card-link" href="llm-serving-system.html?v=14">
+                            <p><a href="raft-consensus-protocol.html?v=15">A Raft KV store in Go, with leader election, durable logs, and recovery across node failures.</a></p>
+                        </article>
+                        <article class="card">
                             <div class="card-top">
-                                <h3>Distributed Serving System</h3>
+                                <h3><a class="repo" href="https://github.com/vaishdho1/Model-Serving-System" target="_blank" rel="noopener" aria-label="Model Serving System on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a> <a href="llm-serving-system.html?v=15">Distributed Serving System</a></h3>
                                 <span>C++, Python, gRPC</span>
                             </div>
-                            <p>Control plane, replica scheduling, and a C++ data path, load tested on AWS GPUs.</p>
-                        </a>
+                            <p><a href="llm-serving-system.html?v=15">Control plane, replica scheduling, and a C++ data path, load tested on AWS GPUs.</a></p>
+                        </article>
                         <a href="#projects" class="more section-link">See more</a>
                     </div>
 
                     <div class="group">
                         <h2><a href="#open-source" class="section-link">Open source</a></h2>
-                        <a class="card card-link section-link" href="#open-source">
+                        <article class="card">
                             <div class="card-top">
-                                <h3>Ray</h3>
+                                <h3><a class="repo" href="https://github.com/search?q=is%3Apr+author%3Avaishdho1+org%3Aray-project&amp;type=pullrequests" target="_blank" rel="noopener" aria-label="Ray pull requests on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a> <a href="#open-source" class="section-link">Ray</a></h3>
                                 <span>Ray Core, Ray Serve</span>
                             </div>
-                            <p>15+ merged pull requests on scheduling, routing, and controller reliability.</p>
-                        </a>
+                            <p><a href="#open-source" class="section-link">15+ merged pull requests on scheduling, routing, and controller reliability.</a></p>
+                        </article>
                         <a href="#open-source" class="more section-link">See more</a>
                     </div>
                 </div>
@@ -122,10 +121,10 @@
                 <h2>Projects</h2>
                 <article class="entry">
                     <div class="entry-head">
-                        <h3><a href="raft-consensus-protocol.html?v=14">Raft Consensus</a></h3>
+                        <h3><a class="repo" href="https://github.com/vaishdho1/Raft-project" target="_blank" rel="noopener" aria-label="Raft Project on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a> <a href="raft-consensus-protocol.html?v=15">Raft Consensus</a></h3>
                         <span class="when">Oct 2025 – Jan 2026</span>
                     </div>
-                    <p class="detail">Go · <a href="https://github.com/vaishdho1/Raft-project" target="_blank" rel="noopener">GitHub</a></p>
+                    <p class="detail">Go</p>
                     <ul>
                         <li>Implemented a Raft consensus module in Go with leader election, durable persistence, replicated logs, commit tracking, snapshotting, and recovery across node failures.</li>
                         <li>Built a strongly consistent KV store on top of Raft with safe client retries during leader changes, achieving ~1K ops/sec throughput and ~100ms p99 latency with fault injection.</li>
@@ -133,7 +132,7 @@
                 </article>
                 <article class="entry">
                     <div class="entry-head">
-                        <h3><a href="llm-serving-system.html?v=14">Distributed Serving System</a></h3>
+                        <h3><a class="repo" href="https://github.com/vaishdho1/Model-Serving-System" target="_blank" rel="noopener" aria-label="Model Serving System on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a> <a href="llm-serving-system.html?v=15">Distributed Serving System</a></h3>
                         <span class="when">April 2025 – Aug 2025</span>
                     </div>
                     <p class="detail">C++, Python, gRPC</p>
@@ -150,7 +149,7 @@
                 <h2>Open Source</h2>
                 <article class="entry">
                     <div class="entry-head">
-                        <h3><a href="https://github.com/search?q=is%3Apr+author%3Avaishdho1+org%3Aray-project&amp;type=pullrequests" target="_blank" rel="noopener">Ray</a></h3>
+                        <h3><a class="repo" href="https://github.com/search?q=is%3Apr+author%3Avaishdho1+org%3Aray-project&amp;type=pullrequests" target="_blank" rel="noopener" aria-label="Ray pull requests on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a> <a href="https://github.com/search?q=is%3Apr+author%3Avaishdho1+org%3Aray-project&amp;type=pullrequests" target="_blank" rel="noopener">Ray</a></h3>
                         <span class="when">Sept 2025 – Present</span>
                     </div>
                     <p class="detail">Ray Core, Ray Serve</p>
@@ -173,21 +172,21 @@
                     <button data-filter="system">System Design</button>
                 </div>
                 <article class="post blog-post-link" data-tags="llm system">
-                    <a href="llm-serving-system.html?v=14">
+                    <a href="llm-serving-system.html?v=15">
                         <p class="meta">LLM · System Design · July 2, 2025</p>
                         <h3>LLM Serving System: V1</h3>
                         <p class="summary">A deep dive into building a distributed LLM serving system from scratch.</p>
                     </a>
                 </article>
                 <article class="post blog-post-link" data-tags="llm system">
-                    <a href="llm-serving-system2.html?v=14">
+                    <a href="llm-serving-system2.html?v=15">
                         <p class="meta">LLM · System Design · September 10, 2025</p>
                         <h3>LLM Serving System: V2</h3>
                         <p class="summary">A deep analysis of optimizations and improvements to the LLM serving system.</p>
                     </a>
                 </article>
                 <article class="post blog-post-link" data-tags="raft system">
-                    <a href="raft-consensus-protocol.html?v=14">
+                    <a href="raft-consensus-protocol.html?v=15">
                         <p class="meta">Distributed Systems · System Design · Jan 26, 2026</p>
                         <h3>Agreeing Under Chaos</h3>
                         <p class="summary">Building a Raft KV store in Go.</p>
@@ -195,6 +194,6 @@
                 </article>
             </section>
         </main>
-        <script src="script.js?v=11"></script>
+        <script src="script.js?v=13"></script>
     </body>
 </html>

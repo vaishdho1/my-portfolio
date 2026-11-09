@@ -14,6 +14,11 @@ function showSection(targetId) {
   void targetSection.offsetWidth;
   targetSection.classList.add('enter');
 
+  document.body.classList.toggle('in-section', targetId !== 'home');
+  if (targetId !== 'home') {
+    document.body.classList.remove('name-away');
+  }
+
   document.querySelectorAll('.nav a').forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === '#' + targetId);
   });
@@ -34,6 +39,19 @@ document.addEventListener('DOMContentLoaded', function () {
         showSection(targetId);
       });
     });
+
+    const heading = document.querySelector('.home h1');
+    const bar = document.querySelector('.bar');
+    if (heading && bar) {
+      const observer = new IntersectionObserver(function (entries) {
+        const onHome = !document.body.classList.contains('in-section');
+        document.body.classList.toggle('name-away', onHome && !entries[0].isIntersecting);
+      }, {
+        rootMargin: '-' + bar.offsetHeight + 'px 0px 0px 0px',
+        threshold: 0
+      });
+      observer.observe(heading);
+    }
   });
 
 //commented this

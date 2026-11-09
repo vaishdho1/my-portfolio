@@ -28,20 +28,37 @@ a {
 }
 
 .bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 1.5rem;
-  max-width: 46rem;
+  max-width: 60rem;
   margin: 0 auto;
-  padding: 1.4rem 1.25rem 0.2rem;
+  padding: 1.4rem 1.25rem 0.7rem;
+  background: var(--bg);
 }
 
 .brand {
-  color: var(--strong);
+  color: #8cbaa0;
   font-family: Georgia, "Iowan Old Style", Palatino, serif;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.brand.corner {
+  display: none;
+}
+
+body.in-section .brand.corner,
+body.name-away .brand.corner {
+  display: inline;
 }
 
 .nav {
@@ -49,6 +66,7 @@ a {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.35rem 0.9rem;
+  margin-left: auto;
 }
 
 .nav a {
@@ -65,13 +83,42 @@ a {
 .home,
 .sheet,
 .article {
-  max-width: 46rem;
+  max-width: 60rem;
   margin: 0 auto;
   padding: 1.4rem 1.25rem 4.5rem;
 }
 
+main {
+  position: relative;
+  z-index: 1;
+}
+
 .article h1 {
   font-size: 2.15rem;
+}
+
+.repo {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.45rem;
+  color: var(--muted);
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+.repo svg {
+  display: block;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+h1 .repo svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.repo:hover {
+  color: var(--strong);
 }
 
 .article h3,
@@ -133,6 +180,24 @@ h1 {
 
 .home > p {
   margin: 0 0 1rem;
+}
+
+.mark {
+  color: #c4a07a;
+  font-size: 1.14em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.home h1 {
+  color: #8cbaa0;
+  font-size: 2.15rem;
+  font-weight: 700;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .links {
@@ -198,6 +263,12 @@ h1 {
   font-weight: 650;
 }
 
+.card h3 a,
+.card p a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .card span,
 .card p {
   color: var(--muted);
@@ -212,7 +283,8 @@ h1 {
   margin: 0.3rem 0 0;
 }
 
-a.card-link:hover {
+a.card-link:hover,
+.card:hover {
   background: var(--hover);
 }
 
@@ -373,6 +445,7 @@ a.card-link:hover {
 
   .nav {
     justify-content: flex-start;
+    margin-left: 0;
   }
 
   h1 {
